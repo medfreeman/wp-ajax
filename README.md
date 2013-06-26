@@ -10,4 +10,4 @@ Author: Mehdi Lahlou
 
 Author URI: http://www.ork.ch/
 
-LICENSE: GPLv2
+License: GPLv2
