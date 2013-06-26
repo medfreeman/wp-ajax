@@ -64,6 +64,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 			add_action( 'admin_enqueue_scripts', array(&$this, 'edit_admin_preview_button') );
 			add_filter( 'template_include', array(&$this, 'wpajax_override_template'), 200 );
 			
+			$this->plugin_list = array();
 			$this->plugin_list = apply_filters( WP_AJAX_PLUGIN_LIST_HOOK, $this->plugin_list );
 			
 			if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
@@ -105,7 +106,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 		function enqueue_script() {
 			wp_enqueue_script('jquery');
 			if (!is_admin()) {
-				wp_enqueue_script('jquery-address', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.address-1.4.min.js', array('jquery'), false, true );
+				wp_enqueue_script('jquery-address', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.address-1.5.min.js', array('jquery'), false, true );
 				wp_enqueue_script('jquery-form', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.form.js', array('jquery'), false, true );
 				wp_enqueue_script('jquery-ajax', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.wp-ajax.js', array('jquery','jquery-address','jquery-form'), false, true );
 				
