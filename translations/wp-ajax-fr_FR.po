@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Ajax\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-23 17:40+0100\n"
+"PO-Revision-Date: 2012-02-23 17:41+0100\n"
+"Last-Translator: Mehdi Lahlou <mehdi.lahlou@free.fr>\n"
+"Language-Team: Mehdi Lahlou <Mehdi.lahlou@free.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: D:\\wamp\\www\\ork\\wp-content\\plugins\\wp-ajax\n"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:18
+msgid "WP Ajax"
+msgstr ""
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:37
+msgid "WP Ajax Settings page"
+msgstr "Options de WP Ajax"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:97
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:107
+msgid "Cache"
+msgstr ""
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:108
+msgid "Links"
+msgstr "Liens"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:109
+msgid "jQuery"
+msgstr ""
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:110
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:180
+msgid "Loading animation"
+msgstr "Animation de chargement"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:111
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:222
+msgid "Transition animation"
+msgstr "Animation de transition"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:122
+msgid "Enable caching"
+msgstr "Activer la mise en cache"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:123
+msgid "Enable automatic caching of ajax-ready template files (enable in production for performance gain, disable if you're modifying template files)."
+msgstr "Activer la mise en cache automatique des squelettes du thème prêts à être utilisés par ajax (activer en production pour un gain de performances, désactiver si vous modifiez régulièrement les squelettes)."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:131
+msgid "Cached files"
+msgstr "Fichiers mis en cache"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:132
+msgid "The number of template files modified and cached for ajax requests. Even if caching is disabled files exist (so they can be php include'd), but are rewritten every request."
+msgstr "Nombre de fichiers de squelette mis en cache. Même si la mise en cache est désactivée les fichiers existent (afin d'être inclus en php), mais sont réécrits à chaque requête de page."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:140
+msgid "Container Selector"
+msgstr "Sélecteur du contenant"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:141
+msgid "The jquery selector of an HTML Element used as container, opening must be contained in header.php and closing in footer.php."
+msgstr "Le sélecteur jQuery d'un élement HTML utilisé comme conteneur, son ouverture doit être dans header.php et sa fermeture dans footer.php."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:150
+msgid "Custom jquery code (before ajax request)"
+msgstr "Code jQuery personnalisé (exécuté avant la requête ajax)"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:151
+msgid "Custom code to execute before the ajax request for the content is made."
+msgstr "Code personnalisé à exécuter avant la requête ajax qui fait la demande du nouveau contenu."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:160
+msgid "Custom jquery code (after ajax request)"
+msgstr "Code jQuery personnalisé (exécuté après la requête ajax)"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:161
+msgid "Custom code to execute after the ajax request for the content is made."
+msgstr "Code personnalisé à exécuter après la requête ajax qui a fait la demande du nouveau contenu."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:170
+msgid "Loading container Selector"
+msgstr "Sélecteur du conteneur de chargement"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:171
+msgid "The jquery selector of an HTML Element used as container for the loading animation."
+msgstr "Le sélecteur jQuery d'un élément HTML utilisé comme conteneur pour l'animation de chargement."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:181
+msgid "Choose loading animation. For custom mode, you have to enter HTML, CSS3 and jQuery animation code."
+msgstr "Choisissez une animation de chargement. En mode personnalisé, vous devez entrer le code HTML, CSS3, et jQuery pour l'animation."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:184
+msgid "Circular"
+msgstr "Circulaire"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:184
+msgid "Striped rectangle"
+msgstr "Rectangle rayé"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:184
+msgid "Flower"
+msgstr "Fleur"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:184
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:226
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:190
+msgid "Loading container HTML Code"
+msgstr "Code HTML du conteneur de l'animation de chargement"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:191
+msgid "The HTML code used as loading animation. Allowed tags : &lt;div>, &lt;span>"
+msgstr "Le code HTML utilisé comme animation de chargement. Balises autorisées : &lt;div>, &lt;span>"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:200
+msgid "Custom loading animation css code"
+msgstr "Code CSS d'animation de chargement personnalisée"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:201
+msgid "Enter loading animation css code, use css3 animations to animate."
+msgstr "Entrez le code CSS responsable de l'animation de chargement, utilisez du CSS3 pour gérer les animations."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:211
+msgid "Custom loading animation jquery code"
+msgstr "Code jQuery d'animation de chargement personnalisée"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:212
+msgid "Enter loading animation jquery code (use the function 'animatePreloader'), used as fallback if css3 animation isn't supported in the client's browser."
+msgstr "Entrez le code jQuery responsable de l'animation de chargement personnalisée (utilisez la fonction 'animatePreloader').<br/>Il sera utilisé dans le cas ou le navigateur du visiteur ne supporte pas les animations CSS3."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:223
+msgid "Choose transition animation (between contents). For custom mode, you have to enter jQuery animation code."
+msgstr "Choisissez une animation de transition (entre les différents contenus). En mode personnalisé, vous devez entrer le code d'animation en jQuery."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:226
+msgid "Fade"
+msgstr "Fondu"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:226
+msgid "Left-to-right"
+msgstr "Gauche à droite"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:226
+msgid "Right-to-left"
+msgstr "Droite à gauche"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:232
+msgid "Custom transition animation jquery code (OUT)"
+msgstr "Code de transition personnalisée (SORTIE)"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:233
+msgid "Enter transition animation jquery code for content disappearing. Use the function 'addPreloader' as callback."
+msgstr "Entrez le code jQuery responsable de l'animation de transition pour la disparition du contenu. Utilisez 'addPreloader' comme callback."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:233
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:244
+msgid "You can use wpAjax.container or wpAjax.loading_container as container element."
+msgstr "Vous pouvez utiliser wpAjax.container ou wpAjax.loading_container comme conteneur dans votre code."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:243
+msgid "Custom transition animation jquery code (IN)"
+msgstr "Code de transition personnalisée (ENTREE)"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:244
+msgid "Enter transition animation jquery code for content reappearing."
+msgstr "Entrez le code jQuery responsable de l'animation de transition pour la réapparition du contenu."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:593
+msgid "Expecting a Numeric value! Please fix."
+msgstr "Merci d'entrer une valeur numérique !"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:606
+msgid "Expecting comma separated numeric values"
+msgstr "Merci d'entrer des valeurs numériques séparées par des virgules !"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:616
+msgid "Expecting comma separated numeric values! Please fix."
+msgstr "Merci d'entrer des valeurs numériques séparées par des virgules !"
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:641
+msgid "Invalid email! Please re-enter!"
+msgstr "E-mail invalide ! Merci de corriger."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:643
+msgid "This setting field cannot be empty! Please enter a valid email address."
+msgstr "Ce champ doit être renseigné ! Merci d'entrer une addresse e-mail valide."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax-settings.php:651
+msgid "Please enter a valid email address."
+msgstr "Merci d'entrer une addresse e-mail valide."
+
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax.php:99
+#: D:\wamp\www\ork\wp-content\plugins\wp-ajax/wp-ajax.php:107
+msgid "Error creating ajax template"
+msgstr "Erreur lors de la création du squelette ajax pour ce contenu"
+

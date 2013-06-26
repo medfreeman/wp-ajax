@@ -1,0 +1,1 @@
+$(wpAjax.container).animate({opacity: 1}, 900);

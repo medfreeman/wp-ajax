@@ -1,0 +1,86 @@
+.preloader {
+    margin: 0 auto;
+    width: 128px;
+}
+.preloader1 {
+	background:url('../images/roues.png') transparent no-repeat 0px -1px;
+	width: 27px;
+	height: 27px;
+	position:relative;
+	left:44px;
+	-webkit-animation-name: rotate1;
+    -webkit-animation-duration:850ms;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+	-moz-animation-name: rotate1;
+    -moz-animation-duration:850ms;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:linear;
+	-o-animation-name: rotate1;
+    -o-animation-duration:850ms;
+    -o-animation-iteration-count:infinite;
+    -o-animation-timing-function:linear;
+}
+@-webkit-keyframes rotate1 {
+  from {-webkit-transform:rotate(0deg);}
+  to {-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes rotate1 {
+  from {-moz-transform:rotate(0deg);}
+  to {-moz-transform:rotate(360deg);}
+}
+@-o-keyframes rotate1 {
+  from {-o-transform:rotate(0deg);}
+  to {-o-transform:rotate(360deg);}
+} 
+.preloader2 {
+	background:url('../images/roues.png') transparent no-repeat -2px -34px;
+	width: 56px;
+	height: 56px;
+	position:relative;
+	top:-16px;
+	-webkit-animation-name: rotate2;
+    -webkit-animation-duration:850ms;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+	-moz-animation-name: rotate2;
+    -moz-animation-duration:850ms;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:linear;
+	-o-animation-name: rotate2;
+    -o-animation-duration:850ms;
+    -o-animation-iteration-count:infinite;
+    -o-animation-timing-function:linear;
+}
+@-webkit-keyframes rotate2 {
+  from {-webkit-transform:rotate(0deg);}
+  to {-webkit-transform:rotate(-360deg);}
+}
+@-moz-keyframes rotate2 {
+  from {-moz-transform:rotate(0deg);}
+  to {-moz-transform:rotate(-360deg);}
+}
+@-o-keyframes rotate2 {
+  from {-o-transform:rotate(0deg);}
+  to {-o-transform:rotate(-360deg);}
+} 
+.preloader3 {
+	background:url('../images/roues.png') transparent no-repeat -28px 0px;
+	width: 32px;
+	height: 32px;
+	position:relative;
+	top:-30px;
+	left:40px;
+	-webkit-animation-name: rotate1;
+    -webkit-animation-duration:850ms;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+	-moz-animation-name: rotate1;
+    -moz-animation-duration:850ms;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:linear;
+	-o-animation-name: rotate1;
+    -o-animation-duration:850ms;
+    -o-animation-iteration-count:infinite;
+    -o-animation-timing-function:linear;
+}
