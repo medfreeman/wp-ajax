@@ -203,10 +203,10 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"desc"    => __( 'Choose loading animation. For custom mode, you have to enter HTML, CSS3 and jQuery animation code.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "select2",  
 				"std"    => "",  
-				"choices" => array( __('Circular',WP_AJAX_TEXTDOMAIN) . "|circular", __('Striped rectangle',WP_AJAX_TEXTDOMAIN) . "|stripe", __('Flower',WP_AJAX_TEXTDOMAIN) . "|flower", __('Custom',WP_AJAX_TEXTDOMAIN) . "|custom")  
+				"choices" => $this->wpajax_get_loading_options()
 			);
 			
-			$options[] = array(  
+			/*$options[] = array(  
 				"section" => "loading_section",  
 				"id"      => WP_AJAX_SHORTNAME . "_loading_container_wrapper",  
 				"title"   => __( 'Loading container HTML Code', WP_AJAX_TEXTDOMAIN ),  
@@ -236,7 +236,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"std"     => '',
 				"class"   => "allowlinebreaks",
 				"attr"	  => "readonly"
-			);
+			);*/
 			
 			$options[] = array(  
 				"section" => "transition_section",  
@@ -938,7 +938,6 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		}
 		function wpajax_get_transition_options() {
 			return $this->wpajax_get_transitions();
-			return array( __('Fade',WP_AJAX_TEXTDOMAIN) . "|fade", __('Left-to-right',WP_AJAX_TEXTDOMAIN) . "|left", __('Right-to-left',WP_AJAX_TEXTDOMAIN) . "|right", __('Custom',WP_AJAX_TEXTDOMAIN) . "|custom");
 		}
 		function wpajax_get_transitions() {
 			$transitions = array();
@@ -957,10 +956,29 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 			}
 			return $transitions;
 		}
+		function wpajax_get_loading_options() {
+			return $this->wpajax_get_loadings();
+		}
+		function wpajax_get_loadings() {
+			$loadings = array();
+			
+			$dir = dirname(__FILE__) . '/loading/';
+
+			// Open a known directory, and proceed to read its contents
+			foreach(glob($dir.'*') as $file) 
+			{
+				if (filetype($file)=='dir') {
+					$loading = end((explode('/', $file)));
+					if (file_exists($file.'/'.$loading.'.html')) {
+						array_push($loadings, __($loading,WP_AJAX_TEXTDOMAIN) . "|" . $loading);
+					}
+				}
+			}
+			return $loadings;
+		}
 	}
 }
 global $wpajaxsettings;
 if (!isset($wpajaxsettings)) {
 	$wpajaxsettings = new WPAjaxSettings();
 }
-?>

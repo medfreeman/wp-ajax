@@ -52,9 +52,6 @@
 		/* Preserve context when $.address calls handler function */
 		$.address.change(this.address.bind(this));
 		
-		if (this.options.loading_js != '')
-			eval(stripslashes(this.options.loading_js));
-		
 		$(this.options.links_selector).address();
     };
 
@@ -101,10 +98,12 @@
 	}
     
     Plugin.prototype.addPreloader = function () {
-		this.$loading_container.prepend(stripslashes(this.options.loading_html));
-		if(!Detect.cssTransitions()) {
-			animatePreloader();
-		}
+		$loading = $(stripslashes(this.options.loading_html));
+		$loading.css('position', 'absolute');
+		/* Centering element on container */
+		$loading.css('left', (this.$loading_container.offset().left + (this.$loading_container.width() / 2) - ($loading.width() / 2))+'px');
+		$loading.css('top', (this.$loading_container.offset().top + (this.$loading_container.height() / 2) - ($loading.height() / 2))+'px');
+		$loading.prependTo(this.$loading_container);
 		this.properties.anim_finished=1; if(this.properties.content_received) this.showContent(this.properties.new_content);
 	}
 	
@@ -157,14 +156,14 @@
 		/*alterForms($container);
 		bindForms($container);*/
 
-		$('.preloader').remove();
+		this.$loading_container.find('.wp-ajax-preloader').remove();
 
 		this.$container.removeClass('out');
 	}
 	
 	/* Utilities */
 	
-	/* Preserve 'this' context */
+	/* Preserve 'this' context on function calls */
 	if (!Function.prototype.bind) {  
 	  Function.prototype.bind = function (oThis) {  
 		if (typeof this !== "function") {  

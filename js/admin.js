@@ -26,7 +26,7 @@ jQuery(function($){
         // look for the input with id=setting title and add a red border to it.  
         $("input[id='" + error_setting + "']").attr('style', 'border-color: red');  
     }
-	$('#wp-ajax_loading_graphics').change(function() {
+	/*$('#wp-ajax_loading_graphics').change(function() {
 		$("#wp-ajax_loading_graphics option:selected").each(function () {
 				var loading = $(this).val();
 				if (loading != 'custom') {
@@ -47,7 +47,7 @@ jQuery(function($){
 				}
               });
 	});
-	$('#wp-ajax_loading_graphics').change();
+	$('#wp-ajax_loading_graphics').change();*/
 	/*$('#wp-ajax_transition_graphics').change(function() {
 		$("#wp-ajax_transition_graphics option:selected").each(function () {
 				var transition = $(this).val();
@@ -73,12 +73,12 @@ jQuery(document).ready(function($) {
 		$('#wp-ajax_transition_js').removeAttr("readonly");
 		$('#wp-ajax_transition_js_in').removeAttr("readonly");
 	}*/
-	if ($('#wp-ajax_loading_graphics option:selected').val() == 'custom') {
+	/*if ($('#wp-ajax_loading_graphics option:selected').val() == 'custom') {
 		$('#wp-ajax_loading_container_wrapper').removeAttr("readonly");
 		$("#wp-ajax_loading_container_wrapper").css("background-color","");
 		$('#wp-ajax_loading_css').removeAttr("readonly");
 		$("#wp-ajax_loading_css").css("background-color","");
 		$('#wp-ajax_loading_js').removeAttr("readonly");
 		$("#wp-ajax_loading_js").css("background-color","");
-	}
+	}*/
 });

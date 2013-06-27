@@ -121,15 +121,18 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$container = $wpajax_options[WP_AJAX_SHORTNAME . "_container_selector"];
 				$precode = $wpajax_options[WP_AJAX_SHORTNAME . "_custom_pre_code"];
 				$postcode = $wpajax_options[WP_AJAX_SHORTNAME . "_custom_post_code"];
-				$loadingcontainer = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_selector"];
-				$loadingcontainer_html = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_wrapper"];
-				$loadingcontainer_js = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_js"];
+				
+				$loading_container = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_selector"];
+				$loading_transition = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_graphics"];
+				
 				$transition = $wpajax_options[WP_AJAX_SHORTNAME . "_transition_graphics"];
 				$link_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_links_selector"];
 				$loading_test_mode = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_test_mode"];
 				
-				wp_localize_script( 'jquery-ajax', 'wpAjax', array( 'ajaxurl' => WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loadingcontainer, 'loading_html' => $loadingcontainer_html, 'loading_js' => $loadingcontainer_js, 'links_selector' => $link_selector, 'plugins' => $plugins, 'loading_test_mode' => $loading_test_mode ));
-				wp_enqueue_style( 'wp-ajax-loading',  WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/transitions/' . $transition . '/' . $transition . '.css');
+				$loading_html = file_get_contents(dirname(__FILE__) . '/loading/' . $loading_transition . '/' . $loading_transition . '.html');
+				wp_localize_script( 'jquery-ajax', 'wpAjax', array( 'ajaxurl' => WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loading_container, 'loading_html' => $loading_html, 'links_selector' => $link_selector, 'plugins' => $plugins, 'loading_test_mode' => $loading_test_mode ));
+				wp_enqueue_style( 'wp-ajax-transition',  WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/transitions/' . $transition . '/' . $transition . '.css');
+				wp_enqueue_style( 'wp-ajax-loading',  WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/loading/' . $loading_transition . '/' . $loading_transition . '.css');
 			}
 		}
 		
@@ -272,4 +275,3 @@ global $wpajax;
 if (!isset($wpajax)) {
 	$wpajax = new WPAjax();
 }
-?>
