@@ -1,274 +1,221 @@
-(function($) {
-	var wp_ajax = {
-		current_url : $.address.baseURL()+"/",
+/*!
+ * jQuery wordpress ajax plugin
+ * Author: mehdi.lahlou@free.fr
+ * Licensed under GPLv2 license
+ */
+
+;(function ( $, window, document, undefined ) {
+
+    // Create the defaults once
+    var pluginName = 'wp_ajax',
+        defaults = {};
+
+    /* The actual plugin constructor */
+    function Plugin( element, options ) {
+        this.element = element;
+        
+        /* merge defaults with wordpress exported options */
+        this.options = $.extend( {}, defaults, wpAjax);
+       /* merge options with default options */
+        this.options = $.extend( {}, this.options, options);
+        
+        this.properties = {
+			anim_finished : 0,
+			new_content : '',
+			content_received : 0,
+			cache : {},
+			url: '',
+			first: true
+		};
 		
-		anim_finished : 0,
-		new_content : '',
-		/*new_background = '',*/
-		content_received : 0,
-		cache : {},
-		/*back_cache = {};*/
-	};
-	var init = true;
-	if (wp_ajax.current_url != wpAjax.baseurl) {
-			window.location.href = wpAjax.baseurl+"#/"+wp_ajax.current_url.substr(wp_ajax.current_url.indexOf(wpAjax.baseurl) + wpAjax.baseurl.length);
-			return;
-		}
+		this.$container = $(this.options.container);
+		this.$loading_container = $(this.options.loading_container);
+        
+        this._defaults = defaults;
+        this._name = pluginName;
+        
+        this.init();
+    }
 
-	$.wp_ajax = function() {
-		if (init) {
-		if (("standalone" in window.navigator) && window.navigator.standalone) {
-			window.location.hash = '#/';
-		}
-		if (window.location.hash == '') {
-			window.location.hash = '#/';
-		}
-		if (window.location.hash != '#') {
-				wp_ajax.current_url = wpAjax.baseurl;
-				init = false;
-		} else {
-			$.address.update();
-			window.location.hash = '#/';
-		}
-		alter_links(wpAjax.links_selector);
-		$.address.init( function(){$(window).scrollTop=0; $.address.change( onhashchange );} );
-		}
-	};
-	
-	$.wp_ajax.plugins = new Object();
-	
-	function alterForms($selector) {
-		$form = $selector.find('form[class="wpcf7-form"]');
-		if ($form.length > 0) {
-			$.getScript(wpAjax.baseurl+"wp-content/plugins/contact-form-7/scripts.js");
-		}
-		$form.each(function(index){
-			$this = $(this);
-			$this.attr("action","");
-			/* TODO : Add hash (location) support) */
-			/*action = $this.attr("action");
-			$this.attr("action",action.substring(action.indexOf("#")));*/
-		});
-	}
-	
-	function bindForms($selector) {
-		/*$selector.find('form[class="wpcf7-form"]').submit(function(event) {
-			wp_ajax.anim_finished=0;
-			
-			if (wpAjax.transition_out != '') {
-				eval(stripslashes(wpAjax.transition_out));
-			}
-			
-			wp_ajax.content_received=0;
-			
-			var queryString = $(this).formSerialize();
-			var params = queryString.QueryStringToJSON();
-			
-			var url = wp_ajax.base_url.slice(0,wp_ajax.base_url.length-1) + wp_ajax.current_url;
+    Plugin.prototype.init = function () {
+        /* Place initialization logic here */
+        /* You already have access to the DOM element and */
+        /* the options via the instance, e.g. this.element */
+        /* and this.options */
+        console.log(this.options.baseurl);
+		
+		this.$container.addClass('wp-ajax-container');
+		
+		$.address.state('/');
+		$.address.strict(false);
+		
+		/* Preserve context when $.address calls handler function */
+		$.address.change(this.address.bind(this));
+		
+		if (this.options.loading_js != '')
+			eval(stripslashes(this.options.loading_js));
+		
+		$(this.options.links_selector).address();
+    };
 
-			$.post(
-					url,
-					params
-					,function(result){
-						processJSON(result,url);
-					},
-						"json"
-				).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:'Error 404'};processJSON(result,url);} });
-			event.preventDefault();
-		});*/
-		/*$selector.find('form[action=""]').submit(function(event) {
-			wp_ajax.anim_finished=0;
-			
-			if (wpAjax.transition_out != '') {
-				eval(stripslashes(wpAjax.transition_out));
-			}
-			
-			wp_ajax.content_received=0;
-			
-			var queryString = $(this).formSerialize();
-			alert(queryString);
-			var params = {
-				action : 'wp-ajax-submit-form',
-				hash : wp_ajax.base_url+$(this).attr("action")
-			};
-			jQuery.extend(params,queryString.QueryStringToJSON());
-			alert(params.toSource());
-			
-			$.post(
-					wpAjax.ajaxurl,
-					params
-					,function(result){
-						processJSON(result,url);
-					},
-						"json"
-				).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:'Error 404'};processJSON(result,url);} });
-			event.preventDefault();
-		});*/
-	}
-	
-	function onhashchange(event) {
-			if (init) {
-				init = false;
-				return;
-			}
+    /* A really lightweight plugin wrapper around the constructor, */
+    /* preventing against multiple instantiations */
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, 
+                new Plugin( this, options ));
+            }
+        });
+    }
+    
+    Plugin.prototype.address = function(event) {
+		if (event.value) {
 			var url = event.value;
-			if (wpAjax.pre_code != '') {
-				eval(stripslashes(wpAjax.pre_code));
-			}
-			wp_ajax.anim_finished=0;
-			
-			if (wpAjax.transition_out != '') {
-				eval(stripslashes(wpAjax.transition_out));
-			}
-			
-			wp_ajax.content_received=0;
-			wp_ajax.current_url = url;
-			loadContent(url);
-	}
-	
-	function processJSON(result,url) {
-		wp_ajax.cache[url]=result;
-		/*back_cache[url]=result.background;*/
-		if(wp_ajax.anim_finished) {
-			showContent(result.html/*,result.background*/);
-		} else {
-			wp_ajax.new_content = result.html;
-			/*new_background = result.background;*/
-			wp_ajax.content_received = 1;
-		}
-	}
-	
-	function processForm(result) {
-		if(wp_ajax.anim_finished) {
-			showContent(result.html/*,result.background*/);
-		} else {
-			wp_ajax.new_content = result.html;
-			wp_ajax.content_received = 1;
-		}
-	}
-	
-	function showContent(html/*,background*/) {
-		$(wpAjax.container).html(html);
-		
-		if (wpAjax.post_code != '') {
-			eval(stripslashes(wpAjax.post_code));
-		}
 
-		/*$(window).resize();*/
-		/*if ($.browser.msie) {
-			document.title = 'L\'usine | '+window.location.hash.substring(2);
-		}*/
-		
-		$container = $(wpAjax.container);
-		alter_links($container.find(wpAjax.links_selector));
-		alterForms($container);
-		bindForms($container);
-
-		$('.preloader').remove();
-		if (wpAjax.transition_in != '') {
-			eval(stripslashes(wpAjax.transition_in));
+			/* Link clicked */
+			if (url.startsWith(this.options.baseurl)) {
+				url = url.substr(this.options.baseurl.length);
+				if(url == '') {
+					url = '/';
+				}
+				this.properties.first = false;
+			};
+			
+			if(!this.properties.first && url) {
+				this.properties.url = url;
+				console.log(this.properties.url);
+				if (this.options.pre_code != '') {
+					eval(stripslashes(this.options.pre_code));
+				}
+				this.properties.anim_finished=0;
+				
+				this.$container.addClass('out');
+				
+				this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));
+				
+				this.properties.content_received=0;
+				this.loadContent();
+			}
 		}
-		/*$('#back1,#back2').smartBackgroundImage(wpAjax.backurl+background);*/
 	}
-	
-	function addPreloader() {
-		$(wpAjax.loading_container).prepend(stripslashes(wpAjax.loading_html));
+    
+    Plugin.prototype.addPreloader = function () {
+		this.$loading_container.prepend(stripslashes(this.options.loading_html));
 		if(!Detect.cssTransitions()) {
 			animatePreloader();
 		}
-		wp_ajax.anim_finished=1; if(wp_ajax.content_received) showContent(wp_ajax.new_content/*,new_background*/);
+		this.properties.anim_finished=1; if(this.properties.content_received) this.showContent(this.properties.new_content);
 	}
 	
-	function loadContent(url) {
-		if ( wp_ajax.cache[ url ]) {
+	Plugin.prototype.loadContent = function () {
+		if ( this.properties.cache[ this.properties.url ]) {
 				/* Since the element is already in the cache, it doesn't need to be
 				 created, so instead of creating it again, let's just show it! */
-				if (wp_ajax.anim_finished) {
-					showContent(wp_ajax.cache[ url ].html/*,back_cache[ url ]*/);
+				if (this.properties.anim_finished) {
+					this.showContent(this.properties.cache[ this.properties.url ].html);
 				} else {
-					wp_ajax.new_content=wp_ajax.cache[ url ].html;
-					/*new_background=back_cache[ url ];*/
-					wp_ajax.content_received=1;
+					this.properties.new_content=this.properties.cache[ this.properties.url ].html;
+					this.properties.content_received=1;
 				}
-				for(plugin in wpAjax.plugins) {
-							plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
-							if(typeof(plugin_object.process) != "undefined") {
-								plugin_object.process.call(this, wp_ajax.cache[ url ]);
-								/* TODO:: EXTEND $args */
-							}
-						}
 			} else {
 				/* Loading animation test mode*/
-				if(wpAjax.loading_test_mode==true) {
+				if(this.options.loading_test_mode==true) {
 					return;
 				}
 			
-				$args = {};
-				var plugin;
-				for(plugin in wpAjax.plugins) {
-					plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
-					if(typeof(plugin_object.postParams) != "undefined") {
-						$arg = plugin_object.postParams.call();
-						/* TODO:: EXTEND $args */
-					}
-				}
-				/* TODO:: EXTEND $args with defaults*/
 				$.post(
-					wpAjax.ajaxurl,
+					this.options.ajaxurl,
 					{
-						action : 'wp-ajax-submit-hash',
-						hash : url
-					},function(result){
-						for(plugin in wpAjax.plugins) {
-							plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
-							if(typeof(plugin_object.process) != "undefined") {
-								plugin_object.process.call(this, result);
-								/* TODO:: EXTEND $args */
-							}
-						}
-						processJSON(result,url);
+						action : 'wp-ajax-submit-url',
+						url : this.properties.url
 					},
-						"json"
+					this.processJSON.bind(this),
+					"json"
 				).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:thrownError};processJSON(result,url);} });
 			}
 	}
 	
-	alter_links = function(selector) {
-		$(selector).each(function(){
-			url = $(this).attr("href");
-			if(url) {
-				hash2_start = url.indexOf(wpAjax.baseurl);
-				if (hash2_start!=-1) {
-					hash = url.substring(hash2_start + wpAjax.baseurl.length,url.length);
-					$(this).attr("href",wpAjax.baseurl+"#/"+hash);
-				}
-			}
-		});
+	Plugin.prototype.processJSON = function (result) {
+		this.properties.cache[this.properties.url]=result;
+		if(this.properties.anim_finished) {
+			this.showContent(result.html);
+		} else {
+			this.properties.new_content = result.html;
+			this.properties.content_received = 1;
+		}
 	}
 	
-	function url_change_from_flash(url) {
-		if(url) {
-				hash2_start = url.indexOf(wpAjax.baseurl);
-				if (hash2_start!=-1) {
-					hash = url.substring(hash2_start + wpAjax.baseurl.length,url.length);
-				}
-			}
-		window.location.hash = "/"+hash;
+	Plugin.prototype.showContent = function (html) {
+		this.$container.html(html);
+		
+		if (this.options.post_code != '') {
+			eval(stripslashes(this.options.post_code));
+		}
+		
+		this.$container.find(this.options.links_selector).address();
+		/*alterForms($container);
+		bindForms($container);*/
+
+		$('.preloader').remove();
+
+		this.$container.removeClass('out');
 	}
 	
+	/* Utilities */
+	
+	/* Preserve 'this' context */
+	if (!Function.prototype.bind) {  
+	  Function.prototype.bind = function (oThis) {  
+		if (typeof this !== "function") {  
+		  // closest thing possible to the ECMAScript 5 internal IsCallable function  
+		  throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");  
+		}  
+
+		var aArgs = Array.prototype.slice.call(arguments, 1),   
+			fToBind = this,   
+			fNOP = function () {},  
+			fBound = function () {  
+			  return fToBind.apply(this instanceof fNOP  
+									 ? this  
+									 : oThis || window,  
+								   aArgs.concat(Array.prototype.slice.call(arguments)));  
+			};  
+
+		fNOP.prototype = this.prototype;  
+		fBound.prototype = new fNOP();  
+
+		return fBound;  
+	  };  
+	}
+	
+	/* 'External link' jQuery selector */ 
+	$.expr[':'].external = function(obj){
+		return !obj.href.match(/^mailto\:/)
+				&& (obj.hostname != location.hostname);
+	};
+	
+	/* String.startsWith function, for browsers that don't implement it */
+	if (typeof String.prototype.startsWith != 'function') {
+	  String.prototype.startsWith = function (str){
+		return this.slice(0, str.length) == str;
+	  };
+	}
+	
+	/* stripslashes php equivalent */
 	function stripslashes (str) {
-		// +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-		// +   improved by: Ates Goral (http://magnetiq.com)
-		// +      fixed by: Mick@el
-		// +   improved by: marrtins    // +   bugfixed by: Onno Marsman
-		// +   improved by: rezna
-		// +   input by: Rick Waldron
-		// +   reimplemented by: Brett Zamir (http://brett-zamir.me)
-		// +   input by: Brant Messenger (http://www.brantmessenger.com/)    // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-		// *     example 1: stripslashes('Kevin\'s code');
-		// *     returns 1: "Kevin's code"
-		// *     example 2: stripslashes('Kevin\\\'s code');
-		// *     returns 2: "Kevin\'s code"    return (str + '').replace(/\\(.?)/g, function (s, n1) {
+		/* +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net) */
+		/* +   improved by: Ates Goral (http://magnetiq.com) */
+		/* +      fixed by: Mick@el */
+		/* +   improved by: marrtins    // +   bugfixed by: Onno Marsman */
+		/* +   improved by: rezna */
+		/* +   input by: Rick Waldron */
+		/* +   reimplemented by: Brett Zamir (http://brett-zamir.me) */
+		/* +   input by: Brant Messenger (http://www.brantmessenger.com/)    // +   bugfixed by: Brett Zamir (http://brett-zamir.me) */
+		/* *     example 1: stripslashes('Kevin\'s code'); */
+		/* *     returns 1: "Kevin's code" */
+		/* *     example 2: stripslashes('Kevin\\\'s code'); */
+		/* *     returns 2: "Kevin\'s code"    return (str + '').replace(/\\(.?)/g, function (s, n1) { */
 		return (str + '').replace(/\\(.?)/g, function (s, n1) {
 			switch (n1) {
 			case '\\':
@@ -280,43 +227,28 @@
 				return n1;        }
 		});
 	}
-
-    if (wpAjax.loading_js != '')
-		eval(stripslashes(wpAjax.loading_js));
 	
-	$.expr[':'].external = function(obj){
-		return !obj.href.match(/^mailto\:/)
-				&& (obj.hostname != location.hostname);
-	};
-	
-	String.prototype.QueryStringToJSON = function () {
-		href = this;
-		var o = {};
-        href.replace(
-            new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-            function ($0, $1, $2, $3) { o[$1] = $3; }
-            );
-        return o;
-	}
+	/* Detect css transitions, to avoid modernizr */
 	var Detect = (function () {
 		function cssTransitions () {
-		var div = document.createElement("div");
-		var p, ext, pre = ["", "ms", "O", "Webkit", "Moz"];
-		for (p in pre) {
-		  if (div.style[ pre[p] + "Transition" ] !== undefined) {
-			ext = pre[p];
-			break;
-		  }
-		}
-		delete div;
-		return ext;
+			var div = document.createElement("div");
+			var p, ext, pre = ["", "ms", "O", "Webkit", "Moz"];
+			for (p in pre) {
+			  if (div.style[ pre[p] + "Transition" ] !== undefined) {
+				ext = pre[p];
+				break;
+			  }
+			}
+			delete div;
+			return ext;
 		};
 		return {
-		"cssTransitions" : cssTransitions
+			"cssTransitions" : cssTransitions
 		};
 	}());
-})(jQuery);
+
+})( jQuery, window, document );
 
 jQuery(document).ready(function($) {
-    $.wp_ajax();
+    $('body').wp_ajax();
 });

@@ -244,11 +244,11 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"title"   => __( 'Transition animation', WP_AJAX_TEXTDOMAIN ),  
 				"desc"    => __( 'Choose transition animation (between contents). For custom mode, you have to enter jQuery animation code.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "select2",  
-				"std"    => "",  
-				"choices" => array( __('Fade',WP_AJAX_TEXTDOMAIN) . "|fade", __('Left-to-right',WP_AJAX_TEXTDOMAIN) . "|left", __('Right-to-left',WP_AJAX_TEXTDOMAIN) . "|right", __('Custom',WP_AJAX_TEXTDOMAIN) . "|custom")  
+				"std"    => '',  
+				"choices" => $this->wpajax_get_transition_options()
 			);
 			
-			$options[] = array(  
+			/*$options[] = array(  
 				"section" => "transition_section",  
 				"id"      => WP_AJAX_SHORTNAME . "_transition_js",  
 				"title"   => __( 'Custom transition animation jquery code (OUT)', WP_AJAX_TEXTDOMAIN ),  
@@ -268,7 +268,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"std"     => '',
 				"class"   => "allowlinebreaks",
 				"attr"	  => "readonly"
-			);
+			);*/
 			
 			$options[] = array(  
 				"section" => "transition_section",  
@@ -935,6 +935,27 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				return count(glob(WP_AJAX_CACHE_DIR . "*.php"));
 			}
 			return 0;
+		}
+		function wpajax_get_transition_options() {
+			return $this->wpajax_get_transitions();
+			return array( __('Fade',WP_AJAX_TEXTDOMAIN) . "|fade", __('Left-to-right',WP_AJAX_TEXTDOMAIN) . "|left", __('Right-to-left',WP_AJAX_TEXTDOMAIN) . "|right", __('Custom',WP_AJAX_TEXTDOMAIN) . "|custom");
+		}
+		function wpajax_get_transitions() {
+			$transitions = array();
+			
+			$dir = dirname(__FILE__) . '/transitions/';
+
+			// Open a known directory, and proceed to read its contents
+			foreach(glob($dir.'*') as $file) 
+			{
+				if (filetype($file)=='dir') {
+					$trans = end((explode('/', $file)));
+					if (file_exists($file.'/'.$trans.'.css')) {
+						array_push($transitions, __($trans,WP_AJAX_TEXTDOMAIN) . "|" . $trans);
+					}
+				}
+			}
+			return $transitions;
 		}
 	}
 }

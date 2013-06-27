@@ -56,8 +56,8 @@ if ( !class_exists( 'WPAjax' ) ) {
 			add_action( 'init', array(&$this, 'load_settings') );
 			add_action( 'wp_head' , array(&$this, 'load_loading_style') );
 			add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_script') );
-			add_action( 'wp_ajax_nopriv_wp-ajax-submit-hash', array(&$this, 'wpajax_hash_submitted') );
-			add_action( 'wp_ajax_wp-ajax-submit-hash', array(&$this, 'wpajax_hash_submitted') );
+			add_action( 'wp_ajax_nopriv_wp-ajax-submit-url', array(&$this, 'wpajax_url_submitted') );
+			add_action( 'wp_ajax_wp-ajax-submit-url', array(&$this, 'wpajax_url_submitted') );
 			add_action( 'wp_ajax_nopriv_wp-ajax-submit-form', array(&$this, 'wpajax_form_submitted') );
 			add_action( 'wp_ajax_wp-ajax-submit-form', array(&$this, 'wpajax_form_submitted') );
 			add_action( 'parse_request', array(&$this, 'wpajax_get_query') );
@@ -124,13 +124,12 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$loadingcontainer = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_selector"];
 				$loadingcontainer_html = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_wrapper"];
 				$loadingcontainer_js = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_js"];
-				$transition_out = $wpajax_options[WP_AJAX_SHORTNAME . "_transition_js"];
-				$transition_in = $wpajax_options[WP_AJAX_SHORTNAME . "_transition_js_in"];
+				$transition = $wpajax_options[WP_AJAX_SHORTNAME . "_transition_graphics"];
 				$link_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_links_selector"];
 				$loading_test_mode = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_test_mode"];
 				
-				wp_localize_script( 'jquery-ajax', 'wpAjax', array( 'ajaxurl' => WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loadingcontainer, 'loading_html' => $loadingcontainer_html, 'loading_js' => $loadingcontainer_js, 'transition_out' => $transition_out, 'transition_in' => $transition_in, 'links_selector' => $link_selector, 'plugins' => $plugins, 'loading_test_mode' => $loading_test_mode ));
-				//wp_enqueue_style( 'wp-ajax-loading',  WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/css/loading.css');
+				wp_localize_script( 'jquery-ajax', 'wpAjax', array( 'ajaxurl' => WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loadingcontainer, 'loading_html' => $loadingcontainer_html, 'loading_js' => $loadingcontainer_js, 'links_selector' => $link_selector, 'plugins' => $plugins, 'loading_test_mode' => $loading_test_mode ));
+				wp_enqueue_style( 'wp-ajax-loading',  WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/transitions/' . $transition . '/' . $transition . '.css');
 			}
 		}
 		
@@ -182,10 +181,10 @@ if ( !class_exists( 'WPAjax' ) ) {
 			exit;
 		}
 	
-		function wpajax_hash_submitted() {
+		function wpajax_url_submitted() {
 			// get the submitted parameters
-			$_SERVER['REQUEST_URI'] = $_POST['hash'];
-			$_SERVER['QUERY_STRING'] = parse_url ($_POST['hash'],PHP_URL_QUERY);
+			$_SERVER['REQUEST_URI'] = $_POST['url'];
+			$_SERVER['QUERY_STRING'] = parse_url($_POST['url'],PHP_URL_QUERY);
 		//die($_SERVER['QUERY_STRING']);
 			//Nasty hack to prevent php warning breaking json
 			if (!isset($this->public_query_vars))
@@ -198,7 +197,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 		
 		function wpajax_form_submitted() {
 			// get the submitted parameters
-			$_SERVER['REQUEST_URI'] = $_POST['hash'];
+			$_SERVER['REQUEST_URI'] = $_POST['url'];
 			//Nasty hack to prevent php warning breaking json
 			if (!isset($this->public_query_vars))
 				$this->public_query_vars = array();
@@ -213,11 +212,18 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$wp_query->query_vars = wp_parse_args( $wp_query->query_vars, $query_vars->query_vars );
 				$wp_query->query = array_filter($wp_query->query_vars);
 				
+				foreach($wp_query->query as $key=>$value) {
+						WP::set_query_var($key, $value);
+				}
+				
+				WP::build_query_string();
+				$wp_query->get_posts();
+				WP::register_globals();
+				
 				//Manque une fonction par rapport à la détermination de quoi afficher en home
 				
 				define('WP_USE_THEMES',true);
 				$this->ajax_request = true;
-				$wp_query->get_posts();
 				include(ABSPATH."wp-includes/template-loader.php");
 			} else {
 				$this->ajax_request = false;
@@ -226,21 +232,21 @@ if ( !class_exists( 'WPAjax' ) ) {
 		
 		function wpajax_convert_template_file($file) {
 			$fp = fopen($file, "r");
-							$output = "";
-							while(!feof( $fp )) {
-								$data = fgets($fp, 4096);
-								
-								$pos = strpos($data, "get_header();");
-								if( $pos !== false) {
-									$data = substr($data,0,$pos).substr($data,$pos+13);
-								}
-								
-								$pos = strpos($data, "get_footer();");
-								if( $pos !== false) {
-									$data = substr($data,0,$pos).substr($data,$pos+13);
-								}
-								$output .= $data;
-							}
+			$output = "";
+			while(!feof( $fp )) {
+				$data = fgets($fp, 4096);
+				
+				$pos = strpos($data, "get_header();");
+				if( $pos !== false) {
+					$data = substr($data,0,$pos).substr($data,$pos+13);
+				}
+				
+				$pos = strpos($data, "get_footer();");
+				if( $pos !== false) {
+					$data = substr($data,0,$pos).substr($data,$pos+13);
+				}
+				$output .= $data;
+			}
 			fclose($fp);
 			return $output;
 		}

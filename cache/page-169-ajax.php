@@ -26,22 +26,7 @@ if ( !defined('ABSPATH')) exit;
 
 		<?php while (have_posts()) : the_post(); ?>
         
-        <?php get_template_part( 'loop-header' ); ?>
-        
-			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>       
-
-                <?php get_template_part( 'post-meta-page' ); ?>
-                
-                <div class="post-entry">
-                    <?php the_content(__('Read more &#8250;', 'responsive')); ?>
-                    <?php wp_link_pages(array('before' => '<div class="pagination">' . __('Pages:', 'responsive'), 'after' => '</div>')); ?>
-                </div><!-- end of .post-entry -->
-            
-				<?php get_template_part( 'post-data' ); ?>
-				               
-			</div><!-- end of #post-<?php the_ID(); ?> -->       
-            
-			<?php comments_template( '', true ); ?>
+			<?php sp_clients_grid(); ?>
             
         <?php 
 		endwhile; 

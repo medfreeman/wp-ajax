@@ -1,1 +1,0 @@
-$(wpAjax.container).animate({opacity: 0}, 1100, addPreloader);

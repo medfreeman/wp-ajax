@@ -6,7 +6,7 @@ if ( !function_exists('add_action') ) {
 }
 if ( !class_exists( 'WPAjaxUtils' ) ) {
 	class WPAjaxUtils {
-		function WPAjaxUtils() {
+		function _construct() {
 		
 		}
 		static function wpajax_get_global_options(){  
