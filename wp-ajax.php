@@ -90,7 +90,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 		
 		function load_settings() {
-			load_plugin_textdomain(WP_AJAX_TEXTDOMAIN, false, WP_AJAX_BASEDIR . '/translations/');
+			load_plugin_textdomain(WP_AJAX_TEXTDOMAIN, false, WP_AJAX_BASEDIR . '/lang/');
 			require_once('wp-ajax-utils.php');
 			if (is_admin()) {
 				require_once('wp-ajax-settings.php');

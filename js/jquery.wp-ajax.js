@@ -6,7 +6,7 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    // Create the defaults once
+    /* Create the defaults once */
     var pluginName = 'wp_ajax',
         defaults = {};
 
