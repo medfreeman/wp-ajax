@@ -124,9 +124,12 @@
 		this.$loading.hide();
 		this.$loading.prependTo(this.$loading_container);
 		
+		/* Switch this.options.loading_position */
+		
+		$loading_position_container = $(this.options.loading_position_container);
 		/* Centering element on container */
-		this.$loading.css('left', (this.$loading_container.offset().left + (this.$loading_container.width() / 2) - (this.$loading.width() / 2))+'px');
-		this.$loading.css('top', (this.$loading_container.offset().top + (this.$loading_container.height() / 2) - (this.$loading.height() / 2))+'px');
+		this.$loading.css('left', ($loading_position_container.offset().left + ($loading_position_container.width() / 2) - (this.$loading.width() / 2))+'px');
+		this.$loading.css('top', ($loading_position_container.offset().top + ($loading_position_container.height() / 2) - (this.$loading.height() / 2))+'px');
 		
 		this.$loading.show();
 		
