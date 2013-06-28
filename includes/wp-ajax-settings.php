@@ -196,7 +196,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"title"   => __( 'Loading container Selector', WP_AJAX_TEXTDOMAIN ),  
 				"desc"    => __( 'The jquery selector of an HTML Element used as container for the loading animation.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "text",  
-				"std"     => '#content',  
+				"std"     => '#container',  
 				"class"   => "nohtml"  
 			);
 			
@@ -208,6 +208,26 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"type"    => "select2",  
 				"std"    => "",  
 				"choices" => $this->wpajax_get_loading_options()
+			);
+			
+			$options[] = array(  
+				"section" => "loading_section",  
+				"id"      => WP_AJAX_SHORTNAME . "_loading_container_position_selector",  
+				"title"   => __( 'Loading container Positionment Selector', WP_AJAX_TEXTDOMAIN ),  
+				"desc"    => __( 'The jquery selector of an HTML Element used as reference for loading animation placement.', WP_AJAX_TEXTDOMAIN ),  
+				"type"    => "text",  
+				"std"     => '#content',  
+				"class"   => "nohtml"  
+			);
+			
+			$options[] = array(  
+				"section" => "loading_section",  
+				"id"      => WP_AJAX_SHORTNAME . "_loading_graphics_position",  
+				"title"   => __( 'Loading animation placement', WP_AJAX_TEXTDOMAIN ),  
+				"desc"    => __( 'Choose loading animation placement, relative to selected element. For custom mode, you have to enter HTML, CSS3 and jQuery animation code.', WP_AJAX_TEXTDOMAIN ),  
+				"type"    => "select2",  
+				"std"    => "",  
+				"choices" => $this->wpajax_get_loading_position_options()
 			);
 			
 			/*$options[] = array(  
@@ -980,6 +1000,11 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				}
 			}
 			return $loadings;
+		}
+		function wpajax_get_loading_position_options() {
+			return array(__('Top Left', WP_AJAX_TEXTDOMAIN) . '|topleft', __('Top', WP_AJAX_TEXTDOMAIN) . '|top', __('Top Right', WP_AJAX_TEXTDOMAIN) . '|topright',
+				__('Left', WP_AJAX_TEXTDOMAIN) . '|left', __('Center', WP_AJAX_TEXTDOMAIN) . '|center', __('Right', WP_AJAX_TEXTDOMAIN) . '|right',
+				__('Bottom Left', WP_AJAX_TEXTDOMAIN) . '|bottomleft', __('Bottom', WP_AJAX_TEXTDOMAIN) . '|bottom', __('Bottom Right', WP_AJAX_TEXTDOMAIN) . '|bottomright');
 		}
 	}
 }

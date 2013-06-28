@@ -12,6 +12,7 @@
 			baseurl: '',
 			ajaxurl: '',
 			container: '',
+			container_class: '',
 			links_selector: '',
 			loading_container: '',
 			loading_html: '',
@@ -54,7 +55,7 @@
         /* and this.options */
         console.log(this.options.baseurl);
 		
-		this.$container.addClass('wp-ajax-container');
+		this.$container.addClass(this.options.container_class);
 		
 		$.address.state('/');
 		$.address.strict(false);
