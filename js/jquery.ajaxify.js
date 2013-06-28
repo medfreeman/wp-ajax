@@ -8,7 +8,18 @@
 
     /* Create the defaults once */
     var pluginName = 'ajaxify',
-        defaults = {};
+        defaults = {
+			baseurl: '',
+			ajaxurl: '',
+			container: '',
+			links_selector: '',
+			loading_container: '',
+			loading_html: '',
+			loading_test_mode: false,
+			plugins: [],
+			pre_code: '',
+			post_code: ''
+		};
 
     /* The actual plugin constructor */
     function Plugin( element, options ) {
