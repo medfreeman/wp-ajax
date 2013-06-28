@@ -4,10 +4,13 @@ if ( !function_exists('add_action') ) {
 	header('HTTP/1.1 403 Forbidden');
 	exit();
 }
-
+/* TODO : Remove duplicate saving message in admin */
 /* 
  * Define Constants 
  */
+define( 'WP_AJAX_TRANSITIONS_DIR', WP_PLUGIN_DIR. '/' . WP_AJAX_BASEDIR . '/transitions');
+define( 'WP_AJAX_LOADING_DIR', WP_PLUGIN_DIR. '/' . WP_AJAX_BASEDIR . '/loading');
+
 if ( !class_exists( 'WPAjaxSettings' ) ) {
 	class WPAjaxSettings {
 		function __construct() {
@@ -944,7 +947,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		function wpajax_get_transitions() {
 			$transitions = array();
 			
-			$dir = dirname(__FILE__) . '/transitions/';
+			$dir = WP_AJAX_TRANSITIONS_DIR . '/';
 
 			// Open a known directory, and proceed to read its contents
 			foreach(glob($dir.'*') as $file) 
@@ -964,7 +967,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		function wpajax_get_loadings() {
 			$loadings = array();
 			
-			$dir = dirname(__FILE__) . '/loading/';
+			$dir = WP_AJAX_LOADING_DIR . '/';
 
 			// Open a known directory, and proceed to read its contents
 			foreach(glob($dir.'*') as $file) 

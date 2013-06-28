@@ -31,7 +31,7 @@ if ( function_exists('add_action') ) {
 	// plugin definitions
 	define( 'WP_AJAX_BASEDIR', dirname( plugin_basename(__FILE__) ) );
 	define( 'WP_AJAX_PLUGIN_URL', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR);
-	define( 'WP_AJAX_CACHE_DIR', WP_PLUGIN_DIR. '/' . WP_AJAX_BASEDIR . '/cache/');
+	define( 'WP_AJAX_CACHE_DIR', WP_PLUGIN_DIR. '/' . WP_AJAX_BASEDIR . '/cache');
 	define( 'WP_AJAX_SHORTNAME', 'wp-ajax'); // used to prefix the individual setting field id see wpajax_options_page_fields()  
 	define( 'WP_AJAX_PAGE_BASENAME', 'wp-ajax-settings'); // the settings page slug
 	define( 'WP_AJAX_SETTINGS', 'wp_ajax_options');
@@ -191,7 +191,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$wpajax_options = WPAjaxUtils::wpajax_get_global_options();
 				
 				$filename = basename($file);
-				$ajaxfile = WP_AJAX_CACHE_DIR.substr(basename($filename),0,strlen($filename)-4)."-ajax.php";
+				$ajaxfile = WP_AJAX_CACHE_DIR . '/' . substr(basename($filename),0,strlen($filename)-4)."-ajax.php";
 				if ($wpajax_options[WP_AJAX_SHORTNAME . "_cache_enabled"]) {
 					if (file_exists($ajaxfile)) {
 						$this->wpajax_submit_ajax_template($ajaxfile);
@@ -219,6 +219,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 			ob_start();
 			include($ajaxfile);
 			$html = ob_get_clean();
+			sleep(5);
 			$this->wpajax_submit_html($html);
 		}
 		

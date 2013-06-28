@@ -39,6 +39,7 @@
 		
 		this.$container = $(this.options.container);
 		this.$loading_container = $(this.options.loading_container);
+		this.$loading = $([]);
         
         this._defaults = defaults;
         this._name = pluginName;
@@ -85,6 +86,7 @@
 				if(url == '') {
 					url = '/';
 				}
+				/* TODO : Cache first page */
 				this.properties.first = false;
 			};
 			
@@ -96,9 +98,10 @@
 				}
 				this.properties.anim_finished=0;
 				
-				this.$container.addClass('out');
-				
+				/* TODO - only one of them then unbind all*/
 				this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));
+				
+				this.$container.addClass('out');
 				
 				this.properties.content_received=0;
 				this.loadContent();
@@ -107,12 +110,15 @@
 	}
     
     Plugin.prototype.addPreloader = function () {
-		$loading = $(stripslashes(this.options.loading_html));
-		$loading.css('position', 'absolute');
+		this.$loading = $(stripslashes(this.options.loading_html));
+		this.$loading.css('position', 'absolute');
+		/* TODO : handle positionment */
 		/* Centering element on container */
-		$loading.css('left', (this.$loading_container.offset().left + (this.$loading_container.width() / 2) - ($loading.width() / 2))+'px');
-		$loading.css('top', (this.$loading_container.offset().top + (this.$loading_container.height() / 2) - ($loading.height() / 2))+'px');
-		$loading.prependTo(this.$loading_container);
+		this.$loading.css('left', (this.$loading_container.offset().left + (this.$loading_container.width() / 2) - (this.$loading.width() / 2))+'px');
+		this.$loading.css('top', (this.$loading_container.offset().top + (this.$loading_container.height() / 2) - (this.$loading.height() / 2))+'px');
+		/* TODO : find maximum possible value in all cases */
+		this.$loading.css('z-index', '2000');
+		this.$loading.prependTo(this.$loading_container);
 		this.properties.anim_finished=1; if(this.properties.content_received) this.showContent(this.properties.new_content);
 	}
 	
@@ -165,7 +171,7 @@
 		/*alterForms($container);
 		bindForms($container);*/
 
-		this.$loading_container.find('.wp-ajax-preloader').remove();
+		this.$loading.remove();
 
 		this.$container.removeClass('out');
 	}
