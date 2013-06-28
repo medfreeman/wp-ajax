@@ -38,7 +38,7 @@ if ( function_exists('add_action') ) {
 	define( 'WP_AJAX_PLUGIN_LIST_HOOK', 'wp-ajax-plugin-list' );
 	
 	// git plugin updater
-	include_once('updater.php');
+	include_once('includes/updater.php');
 }
 
 if ( !class_exists( 'WPAjax' ) ) {
@@ -85,15 +85,15 @@ if ( !class_exists( 'WPAjax' ) ) {
 			}
 		}
 		
-		public function get_plugin_list () {
+		public function get_plugin_list() {
 			return $this->plugin_list;
 		}
 		
 		function load_settings() {
 			load_plugin_textdomain(WP_AJAX_TEXTDOMAIN, false, WP_AJAX_BASEDIR . '/lang/');
-			require_once('wp-ajax-utils.php');
+			require_once('includes/wp-ajax-utils.php');
 			if (is_admin()) {
-				require_once('wp-ajax-settings.php');
+				require_once('includes/wp-ajax-settings.php');
 			}
 		}
 		
@@ -106,9 +106,9 @@ if ( !class_exists( 'WPAjax' ) ) {
 		function enqueue_script() {
 			wp_enqueue_script('jquery');
 			if (!is_admin()) {
-				wp_enqueue_script('jquery-address', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.address-1.5.min.js', array('jquery'), false, true );
-				wp_enqueue_script('jquery-form', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.form.js', array('jquery'), false, true );
-				wp_enqueue_script('jquery-ajaxify', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.ajaxify.js', array('jquery','jquery-address','jquery-form'), false, true );
+				wp_enqueue_script('jquery-address', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/includes/jquery.address-1.5.min.js', array('jquery'), false, true );
+				wp_enqueue_script('jquery-form', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/includes/jquery.form.js', array('jquery'), false, true );
+				wp_enqueue_script('jquery-ajaxify', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/includes/jquery.ajaxify.js', array('jquery','jquery-address','jquery-form'), false, true );
 				wp_enqueue_script('jquery-wp-ajax', WP_PLUGIN_URL . '/' . WP_AJAX_BASEDIR . '/js/jquery.wp-ajax.js', array('jquery-ajaxify', 'jquery','jquery-address','jquery-form'), false, true );
 				
 				$plugins = array();
