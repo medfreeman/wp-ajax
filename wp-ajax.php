@@ -62,7 +62,6 @@ if ( !class_exists( 'WPAjax' ) ) {
 			add_action( 'wp_ajax_nopriv_wp-ajax-submit-form', array(&$this, 'wpajax_form_submitted') );
 			add_action( 'wp_ajax_wp-ajax-submit-form', array(&$this, 'wpajax_form_submitted') );
 			add_action( 'parse_request', array(&$this, 'wpajax_get_query'), 200 );
-			add_action( 'admin_enqueue_scripts', array(&$this, 'edit_admin_preview_button') );
 			add_filter( 'template_include', array(&$this, 'wpajax_override_template'), 200 );
 			
 			$this->plugin_list = array();
@@ -265,13 +264,6 @@ if ( !class_exists( 'WPAjax' ) ) {
 			}
 			fclose($fp);
 			return $output;
-		}
-		
-		function edit_admin_preview_button($hook) {
-			if( 'post.php' == $hook || 'post-new.php' == $hook) {
-				wp_enqueue_script( 'jquery-edit-preview-button', plugins_url('/js/jquery.edit.preview.button.js', __FILE__) );
-				wp_localize_script( 'jquery-edit-preview-button', 'wpAjax', array( 'baseurl'=> home_url().'/' ) );
-			}
 		}
 	}
 }
