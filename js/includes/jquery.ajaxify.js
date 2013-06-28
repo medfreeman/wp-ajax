@@ -1,5 +1,5 @@
 /*!
- * jQuery wordpress ajax plugin
+ * jQuery ajaxify plugin
  * Author: mehdi.lahlou@free.fr
  * Licensed under GPLv2 license
  */
@@ -16,7 +16,6 @@
 			loading_container: '',
 			loading_html: '',
 			loading_test_mode: false,
-			plugins: [],
 			pre_code: '',
 			post_code: ''
 		};
@@ -34,6 +33,7 @@
 			content_received : 0,
 			cache : {},
 			url: '',
+			plugins: [],
 			first: true
 		};
 		

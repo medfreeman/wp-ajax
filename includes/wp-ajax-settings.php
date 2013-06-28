@@ -10,7 +10,7 @@ if ( !function_exists('add_action') ) {
  */
 if ( !class_exists( 'WPAjaxSettings' ) ) {
 	class WPAjaxSettings {
-		function WPAjaxSettings() {
+		function __construct() {
 			add_action( 'admin_menu', array(&$this,'wpajax_add_menu') );
 			add_action( 'admin_init', array(&$this,'wpajax_register_settings') );
 			add_action( 'admin_notices', array(&$this,'wpajax_global_admin_msgs') );
@@ -279,10 +279,11 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"std"     => 0
 			);
 			
-			global $wpajax;
+			
 			$plugin_list = "";
-			foreach ($wpajax->get_plugin_list() as $plugin) {
-				$plugin_list .= $plugin[1]."<br/>";
+			global $wpajaxplugins;
+			foreach ($wpajaxplugins->get_plugin_names() as $plugin) {
+				$plugin_list .= $plugin."<br/>";
 			}
 			$options[] = array(  
 				"section" => "plugins_section",  
