@@ -114,13 +114,19 @@
 		
 		this.$loading = $(stripslashes(this.options.loading_html));
 		this.$loading.css('position', 'absolute');
+		/* TODO : find maximum possible z-index value in all cases */
+		this.$loading.css('z-index', '2000');
 		/* TODO : handle positionment */
+		
+		this.$loading.hide();
+		this.$loading.prependTo(this.$loading_container);
+		
 		/* Centering element on container */
 		this.$loading.css('left', (this.$loading_container.offset().left + (this.$loading_container.width() / 2) - (this.$loading.width() / 2))+'px');
 		this.$loading.css('top', (this.$loading_container.offset().top + (this.$loading_container.height() / 2) - (this.$loading.height() / 2))+'px');
-		/* TODO : find maximum possible value in all cases */
-		this.$loading.css('z-index', '2000');
-		this.$loading.prependTo(this.$loading_container);
+		
+		this.$loading.show();
+		
 		this.properties.anim_finished=1; if(this.properties.content_received) this.showContent(this.properties.new_content);
 	}
 	

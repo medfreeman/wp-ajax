@@ -1,8 +1,8 @@
 #loadingProgressG{
 width:250px;
-height:2px;
+height:1px;
 overflow:hidden;
-background-color:#000000;
+background-color:#666666;
 -moz-border-radius:1px;
 -webkit-border-radius:1px;
 -ms-border-radius:1px;
@@ -13,82 +13,82 @@ border-radius:1px;
 .loadingProgressG{
 background-color:#FFFFFF;
 margin-top:0;
-margin-left:-20px;
+margin-left:-250px;
 -moz-animation-name:bounce_loadingProgressG;
--moz-animation-duration:1.9s;
+-moz-animation-duration:5.5s;
 -moz-animation-iteration-count:infinite;
 -moz-animation-timing-function:linear;
 -webkit-animation-name:bounce_loadingProgressG;
--webkit-animation-duration:1.9s;
+-webkit-animation-duration:5.5s;
 -webkit-animation-iteration-count:infinite;
 -webkit-animation-timing-function:linear;
 -ms-animation-name:bounce_loadingProgressG;
--ms-animation-duration:1.9s;
+-ms-animation-duration:5.5s;
 -ms-animation-iteration-count:infinite;
 -ms-animation-timing-function:linear;
 -o-animation-name:bounce_loadingProgressG;
--o-animation-duration:1.9s;
+-o-animation-duration:5.5s;
 -o-animation-iteration-count:infinite;
 -o-animation-timing-function:linear;
 animation-name:bounce_loadingProgressG;
-animation-duration:1.9s;
+animation-duration:5.5s;
 animation-iteration-count:infinite;
 animation-timing-function:linear;
-width:20px;
-height:2px;
+width:250px;
+height:1px;
 }
 
 @-moz-keyframes bounce_loadingProgressG{
 0%{
-margin-left:-20px;
+margin-left:-250px;
 }
 
 100%{
-margin-left:20px;
+margin-left:250px;
 }
 
 }
 
 @-webkit-keyframes bounce_loadingProgressG{
 0%{
-margin-left:-20px;
+margin-left:-250px;
 }
 
 100%{
-margin-left:20px;
+margin-left:250px;
 }
 
 }
 
 @-ms-keyframes bounce_loadingProgressG{
 0%{
-margin-left:-20px;
+margin-left:-250px;
 }
 
 100%{
-margin-left:20px;
+margin-left:250px;
 }
 
 }
 
 @-o-keyframes bounce_loadingProgressG{
 0%{
-margin-left:-20px;
+margin-left:-250px;
 }
 
 100%{
-margin-left:20px;
+margin-left:250px;
 }
 
 }
 
 @keyframes bounce_loadingProgressG{
 0%{
-margin-left:-20px;
+margin-left:-250px;
 }
 
 100%{
-margin-left:20px;
+margin-left:250px;
 }
 
 }
