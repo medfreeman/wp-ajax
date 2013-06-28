@@ -219,7 +219,6 @@ if ( !class_exists( 'WPAjax' ) ) {
 			ob_start();
 			include($ajaxfile);
 			$html = ob_get_clean();
-			sleep(5);
 			$this->wpajax_submit_html($html);
 		}
 		

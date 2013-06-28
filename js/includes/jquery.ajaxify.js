@@ -110,6 +110,8 @@
 	}
     
     Plugin.prototype.addPreloader = function () {
+		this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader);
+		
 		this.$loading = $(stripslashes(this.options.loading_html));
 		this.$loading.css('position', 'absolute');
 		/* TODO : handle positionment */
