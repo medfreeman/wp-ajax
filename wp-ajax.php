@@ -124,8 +124,8 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$loading_container = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_selector"];
 				$loading_transition = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_graphics"];
 				
-				$loading_container_transition_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_position_selector"];
-				$loading_transition_position = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_graphics_position"];
+				$loading_container_position_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_container_position_selector"];
+				$loading_position = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_graphics_position"];
 				
 				$transition = $wpajax_options[WP_AJAX_SHORTNAME . "_transition_graphics"];
 				$link_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_links_selector"];
@@ -133,7 +133,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 				
 				$loading_html = file_get_contents(dirname(__FILE__) . '/loading/' . $loading_transition . '/' . $loading_transition . '.html');
 				
-				wp_localize_script( 'jquery-wp-ajax', 'wpAjax', array( 'ajaxurl' => WP_AJAX_PLUGIN_URL . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'container_class'=> 'wp-ajax-container', 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loading_container, 'loading_html' => $loading_html, 'links_selector' => $link_selector, 'loading_test_mode' => $loading_test_mode ));
+				wp_localize_script( 'jquery-wp-ajax', 'wpAjax', array( 'ajaxurl' => WP_AJAX_PLUGIN_URL . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'container_class'=> 'wp-ajax-container', 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loading_container, 'loading_html' => $loading_html, 'links_selector' => $link_selector, 'loading_test_mode' => $loading_test_mode, 'loading_position_container' => $loading_container_position_selector, 'loading_position' => $loading_position ));
 				wp_enqueue_style( 'wp-ajax-transition',  WP_AJAX_PLUGIN_URL . '/transitions/' . $transition . '/' . $transition . '.css');
 				wp_enqueue_style( 'wp-ajax-loading',  WP_AJAX_PLUGIN_URL . '/loading/' . $loading_transition . '/' . $loading_transition . '.css');
 			}

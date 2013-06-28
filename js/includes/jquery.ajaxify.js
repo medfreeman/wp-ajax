@@ -16,6 +16,8 @@
 			links_selector: '',
 			loading_container: '',
 			loading_html: '',
+			loading_position_container: '',
+			loading_position: '',
 			loading_test_mode: false,
 			pre_code: '',
 			post_code: ''
