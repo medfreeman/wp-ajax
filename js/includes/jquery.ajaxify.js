@@ -303,7 +303,7 @@
 	var Detect = (function () {
 		function cssProperty(name) {
 			var div = document.createElement("div");
-			var p, ext, pre = ["", "ms", "O", "Webkit", "Moz"];
+			var p, ext, pre = ["", "ms", "O", "Webkit", "Moz", "Khtml"];
 			for (p in pre) {
 			  if (div.style[ pre[p] + name ] !== undefined) {
 				ext = pre[p];
