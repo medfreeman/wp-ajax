@@ -43,12 +43,16 @@
 			cache : {},
 			url: '',
 			plugins: [],
-			first: true
+			first: true,
+			postDataFunctions: new Array()
 		};
 		
 		this.$container = $(this.options.container);
 		this.$loading_container = $(this.options.loading_container);
 		this.$loading = $([]);
+		
+		this.postDataFunctions = [];
+		this.processFunctions = [];
         
         this._defaults = defaults;
         this._name = pluginName;
@@ -83,12 +87,39 @@
     /* A really lightweight plugin wrapper around the constructor, */
     /* preventing against multiple instantiations */
     $.fn[pluginName] = function ( options, callback ) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, 
-                new Plugin( this, options, callback ));
-            }
-        });
+		if (typeof arguments[0] === 'string' && typeof arguments[1] === 'object' && arguments[0] === 'addPlugin') {
+		  var methodName = arguments[0];
+		  var args = Array.prototype.slice.call(arguments, 1);
+		  var returnVal;
+		  this.each(function() {
+			/* Check that the element has a plugin instance, and that */
+			/* the requested public method exists. */
+			if ($.data(this, 'plugin_' + pluginName) && typeof $.data(this, 'plugin_' + pluginName)[methodName] === 'function') {
+			  /* Call the method of the Plugin instance, and Pass it */
+			  /* the supplied arguments. */
+			  /*pluginMethod = $.data(this, 'plugin_' + pluginName)[methodName];*/
+			  returnVal = $.data(this, 'plugin_' + pluginName)[methodName].apply($.data(this, 'plugin_' + pluginName), args);
+			} else {
+			  throw new Error('Method ' +  methodName + ' does not exist on jQuery.' + pluginName);
+			}
+		  });
+		  if (returnVal !== undefined){
+			/* If the method returned a value, return the value. */
+			return returnVal;
+		  } else {
+			/* Otherwise, returning 'this' preserves chainability. */
+			return this;
+		  }
+		/* If the first parameter is an object (options), or was omitted, */
+		/* instantiate a new instance of the plugin. */
+		} else if (typeof options === "object" || !options) {
+			return this.each(function () {
+				if (!$.data(this, 'plugin_' + pluginName)) {
+					$.data(this, 'plugin_' + pluginName, 
+					new Plugin( this, options, callback ));
+				}
+			});
+		}
     }
     
     Plugin.prototype.address = function(event) {
@@ -101,13 +132,19 @@
 				if(url == '') {
 					url = '/';
 				}
-				/* TODO : Cache first page */
 				this.properties.first = false;
 			};
 			
-			if(!this.properties.first && url) {
+			if(this.properties.first) {
+				/* Remove beginning slash */
+				while (url.substring(0, 1) === "/") {
+					url = url.substring(1);
+				}
+
+				this.properties.cache[ url ] = this.$container.html();
+			} else if (url) {
 				this.properties.url = url;
-				console.log(this.properties.url);
+
 				if (this.options.pre_code != '') {
 					eval(stripslashes(this.options.pre_code));
 				}
@@ -118,6 +155,7 @@
 				this.$container.addClass('out');
 				
 				this.properties.content_received=0;
+				this.loadContent.bind(this);
 				this.loadContent();
 			}
 		}
@@ -144,7 +182,7 @@
 		var ypos = 0;
 		switch (pos[0]) {
 			case 'top':
-				ypos = $loading_position_container.offset().top + this.$loading.height();
+				ypos = $loading_position_container.offset().top;
 			break;
 			case 'center':
 			default: 
@@ -159,7 +197,7 @@
 		var xpos = 0;
 		switch (pos[1]) {
 			case 'left':
-				xpos = $loading_position_container.offset().left + this.$loading.width();
+				xpos = $loading_position_container.offset().left;
 			break;
 			case 'center':
 			default: 
@@ -181,36 +219,43 @@
 	
 	Plugin.prototype.loadContent = function () {
 		if ( this.properties.cache[ this.properties.url ]) {
-				/* Since the element is already in the cache, it doesn't need to be
-				 created, so instead of creating it again, let's just show it! */
-				if (this.properties.anim_finished) {
-					this.showContent(this.properties.cache[ this.properties.url ].html);
-				} else {
-					this.properties.new_content=this.properties.cache[ this.properties.url ].html;
-					this.properties.content_received=1;
-				}
+			/* Since the element is already in the cache, it doesn't need to be
+			 created, so instead of creating it again, let's just show it! */
+			if (this.properties.anim_finished) {
+				this.showContent(this.properties.cache[ this.properties.url ].html);
 			} else {
-				/* Loading animation test mode*/
-				if(this.options.loading_test_mode==true) {
-					return;
-				}
-			
-				$.post(
-					this.options.ajaxurl,
-					{
-						action : 'wp-ajax-submit-url',
-						url : this.properties.url
-					},
-					this.processJSON.bind(this),
-					"json"
-				).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:thrownError};processJSON(result,url);} });
+				this.properties.new_content=this.properties.cache[ this.properties.url ].html;
+				this.properties.content_received=1;
 			}
+		} else {
+			/* Loading animation test mode*/
+			if(this.options.loading_test_mode == true) {
+				return;
+			}
+			
+			args = { action : 'wp-ajax-submit-url', url : this.properties.url };
+			
+			for(var i=0;i<this.postDataFunctions.length;i++) {
+				args = $.extend({}, args, this.postDataFunctions[i]());
+			}
+			
+			$.post(
+				this.options.ajaxurl,
+				args,
+				this.processJSON.bind(this),
+				"json"
+			).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:thrownError};processJSON(result,url);} });
+		}
 	}
 	
 	Plugin.prototype.processJSON = function (result) {
 		this.properties.cache[this.properties.url]=result;
 		if(this.properties.anim_finished) {
 			this.showContent(result.html);
+			
+			for(var i=0;i<this.processFunctions.length;i++) {
+				this.processFunctions[i](result);
+			}
 		} else {
 			this.properties.new_content = result.html;
 			this.properties.content_received = 1;
@@ -231,6 +276,15 @@
 		this.$loading.remove();
 
 		this.$container.removeClass('out');
+	}
+	
+	Plugin.prototype.addPlugin = function (plugin) {
+		if (typeof plugin.postParams === 'function') {
+			this.postDataFunctions.push(plugin.postParams);
+		}
+		if (typeof plugin.process === 'function') {
+			this.processFunctions.push(plugin.process);
+		}
 	}
 	
 	/* Utilities */
