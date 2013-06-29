@@ -1,0 +1,493 @@
+﻿
+/*CSS ANIMATION
+======================*/
+a {
+	padding: 3px;
+	-o-transition-property: color,background-color;
+	-o-transition-duration: 500ms,500ms;
+}
+a:hover {
+	background-color: #c70909;
+	color: #fff;
+}
+@-o-keyframes rotate-skull {0% {
+	-o-transform: rotate(0deg)
+}
+25% {
+	-o-transform: rotate(15deg)
+}
+50% {
+	-o-transform: rotate(-5deg)
+}
+55% {
+	-o-transform: rotate(0deg)
+}
+75% {
+	-o-transform: rotate(-10deg)
+}
+100% {
+	-o-transform: rotate(0deg)
+}
+
+}
+@-o-keyframes rotate-head {0% {
+	-o-transform: rotate(0deg) translate(0px,0px);
+}
+40% {
+	-o-transform: rotate(10deg) translate(15px,5px);
+}
+80% {
+	-o-transform: rotate(-5deg) translate(8px,5px);
+}
+100% {
+	-o-transform: rotate(0deg) translate(0px,0px);
+}
+
+}
+@-o-keyframes rotate-shell {0% {
+	-o-transform: rotate(0deg);
+}
+20% {
+	-o-transform: rotate(3deg);
+}
+40% {
+	-o-transform: rotate(0deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+70% {
+	-o-transform: rotate(-3deg);
+}
+90% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes rotate-hip-a {0% {
+	-o-transform: translate(0px,0px);
+}
+75% {
+	-o-transform: translate(0px,0px);
+}
+80% {
+	-o-transform: translate(5px,0px);
+}
+85% {
+	-o-transform: translate(5px,5px);
+}
+90% {
+	-o-transform: translate(-5px,5px);
+}
+95% {
+	-o-transform: translate(-5px,0px);
+}
+100% {
+	-o-transform: translate(0px,0px);
+}
+
+}
+@-o-keyframes rotate-hip-b {0% {
+	-o-transform: translate(0px,0px);
+}
+55% {
+	-o-transform: translate(0px,0px);
+}
+60% {
+	-o-transform: translate(5px,0px);
+}
+65% {
+	-o-transform: translate(5px,5px);
+}
+70% {
+	-o-transform: translate(-5px,5px);
+}
+75% {
+	-o-transform: translate(-5px,0px);
+}
+80% {
+	-o-transform: translate(0px,0px);
+}
+100% {
+	-o-transform: translate(0px,0px);
+}
+
+}
+@-o-keyframes rotate-hip-c {0% {
+	-o-transform: translate(0px,0px);
+}
+25% {
+	-o-transform: translate(0px,0px);
+}
+30% {
+	-o-transform: translate(5px,0px);
+}
+35% {
+	-o-transform: translate(5px,5px);
+}
+40% {
+	-o-transform: translate(-5px,5px);
+}
+45% {
+	-o-transform: translate(-5px,0px);
+}
+50% {
+	-o-transform: translate(0px,0px);
+}
+100% {
+	-o-transform: translate(0px,0px);
+}
+
+}
+@-o-keyframes rotate-hip-d {0% {
+	-o-transform: translate(0px,0px);
+}
+05% {
+	-o-transform: translate(5px,0px);
+}
+10% {
+	-o-transform: translate(5px,5px);
+}
+15% {
+	-o-transform: translate(-5px,5px);
+}
+20% {
+	-o-transform: translate(-5px,0px);
+}
+25% {
+	-o-transform: translate(0px,0px);
+}
+100% {
+	-o-transform: translate(0px,0px);
+}
+
+}
+@-o-keyframes thigh-a {0% {
+	-o-transform: rotate(0deg);
+}
+70% {
+	-o-transform: rotate(0deg);
+}
+80% {
+	-o-transform: rotate(-13deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes thigh-b {0% {
+	-o-transform: rotate(0deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+60% {
+	-o-transform: rotate(-13deg);
+}
+80% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes thigh-c {0% {
+	-o-transform: rotate(0deg);
+}
+20% {
+	-o-transform: rotate(0deg);
+}
+30% {
+	-o-transform: rotate(-13deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes thigh-d {0% {
+	-o-transform: rotate(0deg);
+}
+10% {
+	-o-transform: rotate(-13deg);
+}
+30% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes shin-a {0% {
+	-o-transform: rotate(0deg);
+}
+70% {
+	-o-transform: rotate(0deg);
+}
+80% {
+	-o-transform: rotate(23deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes shin-b {0% {
+	-o-transform: rotate(0deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+60% {
+	-o-transform: rotate(23deg);
+}
+80% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes shin-c {0% {
+	-o-transform: rotate(0deg);
+}
+20% {
+	-o-transform: rotate(0deg);
+}
+30% {
+	-o-transform: rotate(23deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes shin-d {0% {
+	-o-transform: rotate(0deg);
+}
+10% {
+	-o-transform: rotate(23deg);
+}
+30% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes foot-a {0% {
+	-o-transform: rotate(0deg);
+}
+70% {
+	-o-transform: rotate(0deg);
+}
+80% {
+	-o-transform: rotate(-20deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes foot-b {0% {
+	-o-transform: rotate(0deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+60% {
+	-o-transform: rotate(-20deg);
+}
+80% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes foot-c {0% {
+	-o-transform: rotate(0deg);
+}
+20% {
+	-o-transform: rotate(0deg);
+}
+30% {
+	-o-transform: rotate(-20deg);
+}
+50% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes foot-d {0% {
+	-o-transform: rotate(0deg);
+}
+10% {
+	-o-transform: rotate(-20deg);
+}
+30% {
+	-o-transform: rotate(0deg);
+}
+100% {
+	-o-transform: rotate(0deg);
+}
+
+}
+@-o-keyframes screen {0% {
+	background-position: left bottom;
+}
+100% {
+	background-position: right bottom;
+}
+
+}
+#atat #shell {
+	-o-animation-name: rotate-shell;
+	-o-animation-duration: 4s;
+	-o-animation-iteration-count: infinite;
+}
+#atat #skull {
+	-o-animation-name: rotate-skull;
+	-o-animation-duration: 7 s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 0 50%;
+}
+#atat #head {
+	-o-animation-name: rotate-head;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 0 50%;
+}
+#atat #leg-a {
+	-o-animation-name: rotate-hip-a;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 100% 100%;
+}
+#atat #leg-b {
+	-o-animation-name: rotate-hip-b;
+	-o-animation-duration: 8s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 100% 100%;
+}
+#atat #leg-c {
+	-o-animation-name: rotate-hip-c;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 100% 100%;
+}
+#atat #leg-d {
+	-o-animation-name: rotate-hip-d;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 100% 100%;
+}
+#atat #leg-a .leg-thigh {
+	-o-animation-name: thigh-a;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-b .leg-thigh {
+	-o-animation-name: thigh-b;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-c .leg-thigh {
+	-o-animation-name: thigh-c;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-d .leg-thigh {
+	-o-animation-name: thigh-d;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-a .leg-shin {
+	-o-animation-name: shin-a;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-b .leg-shin {
+	-o-animation-name: shin-b;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-c .leg-shin {
+	-o-animation-name: shin-c;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-d .leg-shin {
+	-o-animation-name: shin-d;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-a .leg-foot {
+	-o-animation-name: foot-a;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-b .leg-foot {
+	-o-animation-name: foot-b;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-c .leg-foot {
+	-o-animation-name: foot-c;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#atat #leg-d .leg-foot {
+	-o-animation-name: foot-d;
+	-o-animation-duration: 7s;
+	-o-animation-iteration-count: infinite;
+	-o-transform-origin: 50% 0;
+}
+#the-screen {
+	-o-animation-name: screen;
+	-o-animation-duration: 300s;
+	-o-animation-iteration-count: infinite;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

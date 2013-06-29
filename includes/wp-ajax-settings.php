@@ -1002,9 +1002,9 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 			return $loadings;
 		}
 		function wpajax_get_loading_position_options() {
-			return array(__('Top Left', WP_AJAX_TEXTDOMAIN) . '|topleft', __('Top', WP_AJAX_TEXTDOMAIN) . '|top', __('Top Right', WP_AJAX_TEXTDOMAIN) . '|topright',
-				__('Left', WP_AJAX_TEXTDOMAIN) . '|left', __('Center', WP_AJAX_TEXTDOMAIN) . '|center', __('Right', WP_AJAX_TEXTDOMAIN) . '|right',
-				__('Bottom Left', WP_AJAX_TEXTDOMAIN) . '|bottomleft', __('Bottom', WP_AJAX_TEXTDOMAIN) . '|bottom', __('Bottom Right', WP_AJAX_TEXTDOMAIN) . '|bottomright');
+			return array(__('Top Left', WP_AJAX_TEXTDOMAIN) . '|top-left', __('Top', WP_AJAX_TEXTDOMAIN) . '|top-center', __('Top Right', WP_AJAX_TEXTDOMAIN) . '|top-right',
+				__('Left', WP_AJAX_TEXTDOMAIN) . '|center-left', __('Center', WP_AJAX_TEXTDOMAIN) . '|center-center', __('Right', WP_AJAX_TEXTDOMAIN) . '|center-right',
+				__('Bottom Left', WP_AJAX_TEXTDOMAIN) . '|bottom-left', __('Bottom', WP_AJAX_TEXTDOMAIN) . '|bottom-center', __('Bottom Right', WP_AJAX_TEXTDOMAIN) . '|bottom-right');
 		}
 	}
 }

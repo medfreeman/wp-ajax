@@ -24,11 +24,17 @@
 		};
 
     /* The actual plugin constructor */
-    function Plugin( element, options ) {
+    function Plugin( element, options, callback ) {
         this.element = element;
         
        /* merge options with default options */
         this.options = $.extend( {}, defaults, options);
+        
+        if(typeof(callback) != 'function') {
+			this.callback = $.noop();
+		} else {
+			this.callback = callback;
+		}
         
         this.properties = {
 			anim_finished : 0,
@@ -55,9 +61,9 @@
         /* You already have access to the DOM element and */
         /* the options via the instance, e.g. this.element */
         /* and this.options */
-        console.log(this.options.baseurl);
 		
 		this.$container.addClass(this.options.container_class);
+		this.$container.css('transform', 'translate3d(0,0,0)');
 		
 		$.address.state('/');
 		$.address.strict(false);
@@ -66,15 +72,21 @@
 		$.address.change(this.address.bind(this));
 		
 		$(this.options.links_selector).address();
+		
+		if(this.callback !== $.noop()) {
+			if(!Detect.cssTransitions || !Detect.cssAnimations) {
+				this.callback(Detect.cssTransitions, Detect.cssAnimations);
+			}
+		}
     };
 
     /* A really lightweight plugin wrapper around the constructor, */
     /* preventing against multiple instantiations */
-    $.fn[pluginName] = function ( options ) {
+    $.fn[pluginName] = function ( options, callback ) {
         return this.each(function () {
             if (!$.data(this, 'plugin_' + pluginName)) {
                 $.data(this, 'plugin_' + pluginName, 
-                new Plugin( this, options ));
+                new Plugin( this, options, callback ));
             }
         });
     }
@@ -101,7 +113,6 @@
 				}
 				this.properties.anim_finished=0;
 				
-				/* TODO - only one of them then unbind all*/
 				this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));
 				
 				this.$container.addClass('out');
@@ -117,19 +128,51 @@
 		
 		this.$loading = $(stripslashes(this.options.loading_html));
 		this.$loading.css('position', 'absolute');
-		/* TODO : find maximum possible z-index value in all cases */
-		this.$loading.css('z-index', '2000');
-		/* TODO : handle positionment */
+		this.$loading.css('z-index', '9999');
 		
 		this.$loading.hide();
 		this.$loading.prependTo(this.$loading_container);
 		
-		/* Switch this.options.loading_position */
+		this.$loading.css('transform', 'translate3d(0,0,0)');
 		
 		$loading_position_container = $(this.options.loading_position_container);
+		
+		var pos = new Array();
+		pos = this.options.loading_position.split("-");
+		
+		/* y pos */
+		var ypos = 0;
+		switch (pos[0]) {
+			case 'top':
+				ypos = $loading_position_container.offset().top + this.$loading.height();
+			break;
+			case 'center':
+			default: 
+				ypos = $loading_position_container.offset().top + ($loading_position_container.height() / 2) - (this.$loading.height() / 2);
+			break;
+			case 'bottom':
+				ypos = $loading_position_container.offset().top + $loading_position_container.height() - this.$loading.height();
+			break;
+		}
+		
+		/* x pos */
+		var xpos = 0;
+		switch (pos[1]) {
+			case 'left':
+				xpos = $loading_position_container.offset().left + this.$loading.width();
+			break;
+			case 'center':
+			default: 
+				xpos = $loading_position_container.offset().left + ($loading_position_container.width() / 2) - (this.$loading.width() / 2);
+			break;
+			case 'right':
+				xpos = $loading_position_container.offset().left + $loading_position_container.width() - this.$loading.width();
+			break;
+		}
+		
 		/* Centering element on container */
-		this.$loading.css('left', ($loading_position_container.offset().left + ($loading_position_container.width() / 2) - (this.$loading.width() / 2))+'px');
-		this.$loading.css('top', ($loading_position_container.offset().top + ($loading_position_container.height() / 2) - (this.$loading.height() / 2))+'px');
+		this.$loading.css('left', xpos + 'px');
+		this.$loading.css('top', ypos + 'px');
 		
 		this.$loading.show();
 		
@@ -191,7 +234,7 @@
 	}
 	
 	/* Utilities */
-	
+
 	/* Preserve 'this' context on function calls */
 	if (!Function.prototype.bind) {  
 	  Function.prototype.bind = function (oThis) {  
@@ -258,11 +301,11 @@
 	
 	/* Detect css transitions, to avoid modernizr */
 	var Detect = (function () {
-		function cssTransitions () {
+		function cssProperty(name) {
 			var div = document.createElement("div");
 			var p, ext, pre = ["", "ms", "O", "Webkit", "Moz"];
 			for (p in pre) {
-			  if (div.style[ pre[p] + "Transition" ] !== undefined) {
+			  if (div.style[ pre[p] + name ] !== undefined) {
 				ext = pre[p];
 				break;
 			  }
@@ -271,7 +314,8 @@
 			return ext;
 		};
 		return {
-			"cssTransitions" : cssTransitions
+			"cssTransitions" : cssProperty('Transition'),
+			"cssAnimations" : cssProperty('Animation')
 		};
 	}());
 

@@ -1,0 +1,620 @@
+﻿
+/*CSS ANIMATION
+======================*/
+a {
+	padding: 3px;
+	transition-property: color,background-color;
+	transition-duration: 500ms,500ms;
+}
+a:hover {
+	background-color: #c70909;
+	color: #fff;
+}
+@keyframes rotate-skull {0% {
+	transform: rotate(0deg)
+}
+25% {
+	transform: rotate(15deg)
+}
+50% {
+	transform: rotate(-5deg)
+}
+55% {
+	transform: rotate(0deg)
+}
+75% {
+	transform: rotate(-10deg)
+}
+100% {
+	transform: rotate(0deg)
+}
+
+}
+@keyframes rotate-head {0% {
+	transform: rotate(0deg) translate(0px,0px);
+}
+40% {
+	transform: rotate(10deg) translate(15px,5px);
+}
+80% {
+	transform: rotate(-5deg) translate(8px,5px);
+}
+100% {
+	transform: rotate(0deg) translate(0px,0px);
+}
+
+}
+@keyframes rotate-shell {0% {
+	transform: rotate(0deg);
+}
+20% {
+	transform: rotate(3deg);
+}
+40% {
+	transform: rotate(0deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+70% {
+	transform: rotate(-3deg);
+}
+90% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes rotate-hip-a {0% {
+	transform: translate(0px,0px);
+}
+75% {
+	transform: translate(0px,0px);
+}
+80% {
+	transform: translate(5px,0px);
+}
+85% {
+	transform: translate(5px,5px);
+}
+90% {
+	transform: translate(-5px,5px);
+}
+95% {
+	transform: translate(-5px,0px);
+}
+100% {
+	transform: translate(0px,0px);
+}
+
+}
+@keyframes rotate-hip-b {0% {
+	transform: translate(0px,0px);
+}
+55% {
+	transform: translate(0px,0px);
+}
+60% {
+	transform: translate(5px,0px);
+}
+65% {
+	transform: translate(5px,5px);
+}
+70% {
+	transform: translate(-5px,5px);
+}
+75% {
+	transform: translate(-5px,0px);
+}
+80% {
+	transform: translate(0px,0px);
+}
+100% {
+	transform: translate(0px,0px);
+}
+
+}
+@keyframes rotate-hip-c {0% {
+	transform: translate(0px,0px);
+}
+25% {
+	transform: translate(0px,0px);
+}
+30% {
+	transform: translate(5px,0px);
+}
+35% {
+	transform: translate(5px,5px);
+}
+40% {
+	transform: translate(-5px,5px);
+}
+45% {
+	transform: translate(-5px,0px);
+}
+50% {
+	transform: translate(0px,0px);
+}
+100% {
+	transform: translate(0px,0px);
+}
+
+}
+@keyframes rotate-hip-d {0% {
+	transform: translate(0px,0px);
+}
+05% {
+	transform: translate(5px,0px);
+}
+10% {
+	transform: translate(5px,5px);
+}
+15% {
+	transform: translate(-5px,5px);
+}
+20% {
+	transform: translate(-5px,0px);
+}
+25% {
+	transform: translate(0px,0px);
+}
+100% {
+	transform: translate(0px,0px);
+}
+
+}
+@keyframes thigh-a {0% {
+	transform: rotate(0deg);
+}
+70% {
+	transform: rotate(0deg);
+}
+80% {
+	transform: rotate(-13deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes thigh-b {0% {
+	transform: rotate(0deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+60% {
+	transform: rotate(-13deg);
+}
+80% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes thigh-c {0% {
+	transform: rotate(0deg);
+}
+20% {
+	transform: rotate(0deg);
+}
+30% {
+	transform: rotate(-13deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes thigh-d {0% {
+	transform: rotate(0deg);
+}
+10% {
+	transform: rotate(-13deg);
+}
+30% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes shin-a {0% {
+	transform: rotate(0deg);
+}
+70% {
+	transform: rotate(0deg);
+}
+80% {
+	transform: rotate(23deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes shin-b {0% {
+	transform: rotate(0deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+60% {
+	transform: rotate(23deg);
+}
+80% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes shin-c {0% {
+	transform: rotate(0deg);
+}
+20% {
+	transform: rotate(0deg);
+}
+30% {
+	transform: rotate(23deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes shin-d {0% {
+	transform: rotate(0deg);
+}
+10% {
+	transform: rotate(23deg);
+}
+30% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes foot-a {0% {
+	transform: rotate(0deg);
+}
+70% {
+	transform: rotate(0deg);
+}
+80% {
+	transform: rotate(-20deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes foot-b {0% {
+	transform: rotate(0deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+60% {
+	transform: rotate(-20deg);
+}
+80% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes foot-c {0% {
+	transform: rotate(0deg);
+}
+20% {
+	transform: rotate(0deg);
+}
+30% {
+	transform: rotate(-20deg);
+}
+50% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes foot-d {0% {
+	transform: rotate(0deg);
+}
+10% {
+	transform: rotate(-20deg);
+}
+30% {
+	transform: rotate(0deg);
+}
+100% {
+	transform: rotate(0deg);
+}
+
+}
+@keyframes screen {
+0% {
+	background-position: left bottom;
+}
+100% {
+	background-position: right bottom;
+}
+
+}
+
+@-ms-keyframes screen {0% {
+	background-position-x: 1px;
+}
+100% {
+	background-position-x: -4203px;
+}
+}
+
+#atat #shell {
+	animation-name: rotate-shell;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+#atat #skull {
+	animation-name: rotate-skull;
+	animation-duration: 7 s;
+	animation-iteration-count: infinite;
+	transform-origin: 0 50%;
+}
+#atat #head {
+	animation-name: rotate-head;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 0 50%;
+}
+#atat #leg-a {
+	animation-name: rotate-hip-a;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 100% 100%;
+}
+#atat #leg-b {
+	animation-name: rotate-hip-b;
+	animation-duration: 8s;
+	animation-iteration-count: infinite;
+	transform-origin: 100% 100%;
+}
+#atat #leg-c {
+	animation-name: rotate-hip-c;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 100% 100%;
+}
+#atat #leg-d {
+	animation-name: rotate-hip-d;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 100% 100%;
+}
+#atat #leg-a .leg-thigh {
+	animation-name: thigh-a;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-b .leg-thigh {
+	animation-name: thigh-b;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-c .leg-thigh {
+	animation-name: thigh-c;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-d .leg-thigh {
+	animation-name: thigh-d;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-a .leg-shin {
+	animation-name: shin-a;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-b .leg-shin {
+	animation-name: shin-b;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-c .leg-shin {
+	animation-name: shin-c;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-d .leg-shin {
+	animation-name: shin-d;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-a .leg-foot {
+	animation-name: foot-a;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-b .leg-foot {
+	animation-name: foot-b;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-c .leg-foot {
+	animation-name: foot-c;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#atat #leg-d .leg-foot {
+	animation-name: foot-d;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	transform-origin: 50% 0;
+}
+#the-screen {
+	animation-name: screen;
+	animation-duration: 300s;
+	animation-iteration-count: infinite;
+}
+/*CSS STYLES
+======================*/
+#atat {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	top: 60px;
+	left: 50px;
+	margin: 0;
+	padding: 0;
+	z-index: 10;
+}
+#atat #shell {
+	width: 300px;
+	height: 195px;
+	background: transparent url(atat-body.png) no-repeat top left;
+	position: absolute;
+}
+#leg-a,
+#leg-b,
+#leg-c,
+#leg-d {
+	height: 450px;
+	width: 131px;
+	position: relative;
+}
+#leg-a {
+	left: -10px;
+	position: absolute;
+	top: 140px;
+}
+#leg-b {
+	position: absolute;
+	right: 20px;
+	top: 140px;
+}
+#leg-c {
+	left: 3px;
+	position: absolute;
+	top: 150px;
+}
+#leg-d {
+	position: absolute;
+	right: 10px;
+	top: 150px;
+}
+.leg-thigh {
+	height: 120px;
+	width: 131px;
+	background: url(atat-thigh.png) top center no-repeat;
+	position: relative;
+}
+.background .leg-thigh {
+	background: url(atat-thigh-dark.png) top center no-repeat;
+}
+.leg-shin {
+	position: absolute;
+	top: 100px;
+	height: 115px;
+	width: 131px;
+}
+.leg-shin .exo {
+	height: 115px;
+	width: 131px;
+	position: relative;
+	background: url(atat-knee.png) center top no-repeat,
+	url(atat-shin.png) center bottom no-repeat;
+	z-index: 20;
+}
+.background .leg-shin .exo {
+	background: url(atat-knee-dark.png) center top no-repeat,
+	url(atat-shin-dark.png) center bottom no-repeat;
+}
+.leg-foot {
+	height: 90px;
+	width: 131px;
+	position: absolute;
+	bottom: -70px;
+	background: url(atat-foot.png) center bottom no-repeat;
+}
+.background .leg-foot {
+	background: url(atat-foot-dark.png) center bottom no-repeat;
+}
+#head {
+	height: 100px;
+	position: absolute;
+	right: -190px;
+	top: 30px;
+	width: 230px;
+}
+#skull {
+	background: url(atat-skull.png) left center no-repeat;
+	width: 186px;
+	height: 123px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 300;
+}
+#neck {
+	width: 82px;
+	height: 50px;
+	position: absolute;
+	top: 30%;
+	left: 0;
+	background: url(atat-neck.png) left center no-repeat;
+}
+#the-screen {
+	background: #53809F url(atat-background.jpg) no-repeat scroll 0 100%;
+	border: 1px solid #444444;
+	height: 519px;
+	left: 0px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 0px;
+	width: 676px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
