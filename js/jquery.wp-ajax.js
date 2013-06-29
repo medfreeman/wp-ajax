@@ -4,7 +4,7 @@
  * Licensed under GPLv2 license
  */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, undefined ) {
     $('body').ajaxify(wpAjaxify, function(cssTransitions, cssAnimations){
 		scripts = [];
 		if(!cssTransitions) {
@@ -38,4 +38,4 @@
 			return;
 		}
 	}
-})( jQuery, window, document );
+})( jQuery );
