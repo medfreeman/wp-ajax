@@ -51,6 +51,7 @@
 		this.$loading_container = $(this.options.loading_container);
 		this.$loading = $([]);
 		
+		this.initialCachingFunctions = [];
 		this.postDataFunctions = [];
 		this.processFunctions = [];
         
@@ -141,7 +142,12 @@
 					url = url.substring(1);
 				}
 
-				this.properties.cache[ url ] = this.$container.html();
+				var args = { html: this.$container.html() }
+				for(var i=0;i<this.initialCachingFunctions.length;i++) {
+					args = $.extend({}, args, this.initialCachingFunctions[i]());
+				}
+				
+				this.properties.cache[ url ] = args;
 			} else if (url) {
 				this.properties.url = url;
 
@@ -222,9 +228,9 @@
 			/* Since the element is already in the cache, it doesn't need to be
 			 created, so instead of creating it again, let's just show it! */
 			if (this.properties.anim_finished) {
-				this.showContent(this.properties.cache[ this.properties.url ].html);
+				this.showContent(this.properties.cache[ this.properties.url ]);
 			} else {
-				this.properties.new_content=this.properties.cache[ this.properties.url ].html;
+				this.properties.new_content=this.properties.cache[ this.properties.url ];
 				this.properties.content_received=1;
 			}
 		} else {
@@ -251,19 +257,19 @@
 	Plugin.prototype.processJSON = function (result) {
 		this.properties.cache[this.properties.url]=result;
 		if(this.properties.anim_finished) {
-			this.showContent(result.html);
-			
-			for(var i=0;i<this.processFunctions.length;i++) {
-				this.processFunctions[i](result);
-			}
+			this.showContent(result);
 		} else {
-			this.properties.new_content = result.html;
+			this.properties.new_content = result;
 			this.properties.content_received = 1;
 		}
 	}
 	
-	Plugin.prototype.showContent = function (html) {
-		this.$container.html(html);
+	Plugin.prototype.showContent = function (result) {
+		this.$container.html(result.html);
+		
+		for(var i=0;i<this.processFunctions.length;i++) {
+			this.processFunctions[i](result);
+		}
 		
 		if (this.options.post_code != '') {
 			eval(stripslashes(this.options.post_code));
@@ -279,6 +285,9 @@
 	}
 	
 	Plugin.prototype.addPlugin = function (plugin) {
+		if (typeof plugin.firstCaching === 'function') {
+			this.initialCachingFunctions.push(plugin.firstCaching);
+		}
 		if (typeof plugin.postParams === 'function') {
 			this.postDataFunctions.push(plugin.postParams);
 		}

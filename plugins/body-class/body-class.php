@@ -25,8 +25,7 @@ if ( !class_exists( 'WPAjaxPluginBodyClass' ) ) {
 		}
 		
 		function wp_ajax_process ( $render_array ) {
-			$body_class = get_body_class();
-			$render_array['body_class'] = $body_class;
+			$render_array['body_classes'] = get_body_class();
 			return $render_array;
 		}
 		

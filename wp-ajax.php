@@ -142,6 +142,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 	
 		function wpajax_url_submitted() {
+			/* TODO : Escape Parameters */
 			// get the submitted parameters
 			$_SERVER['REQUEST_URI'] = $_POST['url'];
 			$_SERVER['QUERY_STRING'] = parse_url($_POST['url'],PHP_URL_QUERY);
@@ -166,6 +167,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 		
 		function wpajax_get_query(&$query_vars) {
+			/* TODO : Implement nonces */
 			if(isset($query_vars->extra_query_vars['ajax'])) {
 				wp();
 				

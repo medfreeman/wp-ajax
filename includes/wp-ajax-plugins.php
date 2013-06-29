@@ -24,6 +24,7 @@ if ( !class_exists( 'WPAjaxPlugins' ) ) {
 			foreach ($this->plugin_array as $plugin) {
 				$this->plugin_names[] = $plugin[1];
 				add_filter( WP_AJAX_PLUGIN_RENDER_HOOK, $plugin[2] );
+				/* TODO : Sanitize plugin input */
 			}
 			
 			add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_scripts') );
