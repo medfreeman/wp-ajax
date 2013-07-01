@@ -226,7 +226,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"title"   => __( 'Loading animation placement', WP_AJAX_TEXTDOMAIN ),  
 				"desc"    => __( 'Choose loading animation placement, relative to selected element. For custom mode, you have to enter HTML, CSS3 and jQuery animation code.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "select2",  
-				"std"    => "",  
+				"std"    => "top-center",  
 				"choices" => $this->wpajax_get_loading_position_options()
 			);
 			

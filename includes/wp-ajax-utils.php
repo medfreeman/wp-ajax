@@ -14,7 +14,7 @@ if ( !class_exists( 'WPAjaxUtils' ) ) {
 			$wpajax_option = array();  
 		  
 			$wpajax_option  = get_option(WP_AJAX_SETTINGS);
-		  
+			
 			return $wpajax_option;  
 		}
 	}

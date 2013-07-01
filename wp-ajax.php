@@ -114,7 +114,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 				wp_enqueue_script('jquery-ajaxify');
 				wp_enqueue_script(WP_AJAX_SCRIPT_UID);
 				
-				/* TODO : Default settings when not saved for the first time*/
+				/* TODO : Show warning message to make admin configure the plugin */
 				$wpajax_options = WPAjaxUtils::wpajax_get_global_options();
 				//die(maybe_serialize($wpajax_options));
 				$container = $wpajax_options[WP_AJAX_SHORTNAME . "_container_selector"];
@@ -142,12 +142,10 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 	
 		function wpajax_url_submitted() {
-			/* TODO : Escape Parameters */
 			// get the submitted parameters
-			$_SERVER['REQUEST_URI'] = $_POST['url'];
-			$_SERVER['QUERY_STRING'] = parse_url($_POST['url'],PHP_URL_QUERY);
-		//echo $_POST['url'];
-		//die();
+			$_SERVER['REQUEST_URI'] = urlencode($_POST['url']);
+			$_SERVER['QUERY_STRING'] = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
+
 			//Nasty hack to prevent php warning breaking json
 			if (!isset($this->public_query_vars))
 				$this->public_query_vars = array();
