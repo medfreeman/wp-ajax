@@ -35,11 +35,24 @@ if ( !class_exists( 'WPAjaxPlugins' ) ) {
 				wp_register_script($plugin[0], $plugin[3], array(WP_AJAX_SCRIPT_UID), false, true);
 			}
 			if (!is_admin()) {
-				foreach ($this->plugin_array as $script) {
+				foreach ($this->plugin_array as $plugin) {
 					wp_enqueue_script($plugin[0]);
+					if (isset($plugin[4]) && is_array($plugin[4])) {
+						wp_localize_script($plugin[0], $this->dash2Camelcase($plugin[0]), $plugin[4]);
+					}
 				}
 			}
 		}
+		
+		function dash2Camelcase($str) { // Split string in words. 
+			$words = explode('-', strtolower($str));
+			if(empty($words)) return '';
+			$return = $words[0];
+			for($i=1;$i<sizeof($words);$i++) {
+				$return .= ucfirst(trim($words[$i]));
+			} 
+			return $return;
+		} // - See more at: http://www.mrleong.net/97/php-underscore-to-camelcase/#sthash.NLQiIZE5.dpuf
 		
 		public function get_plugin_names() {
 			return $this->plugin_names;

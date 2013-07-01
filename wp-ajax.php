@@ -88,6 +88,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 			require_once('includes/wp-ajax-utils.php');
 			
 			require_once('plugins/body-class/body-class.php');
+			require_once('plugins/wp-nonce/wp-nonce.php');
 			
 			require_once('includes/wp-ajax-plugins.php');
 			if (is_admin()) {
@@ -143,7 +144,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 	
 		function wpajax_url_submitted() {
 			// get the submitted parameters
-			$_SERVER['REQUEST_URI'] = urlencode($_POST['url']);
+			$_SERVER['REQUEST_URI'] = urldecode($_POST['url']);
 			$_SERVER['QUERY_STRING'] = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
 
 			//Nasty hack to prevent php warning breaking json

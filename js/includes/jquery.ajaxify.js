@@ -239,7 +239,7 @@
 				return;
 			}
 			
-			args = { action : 'wp-ajax-submit-url', url : this.properties.url };
+			args = { action : 'wp-ajax-submit-url', url : encodeURI(this.properties.url) };
 			
 			for(var i=0;i<this.postDataFunctions.length;i++) {
 				args = $.extend({}, args, this.postDataFunctions[i]());
@@ -250,7 +250,15 @@
 				args,
 				this.processJSON.bind(this),
 				"json"
-			).error(function(xhr, ajaxOptions, thrownError) { if(xhr.status=='404') {result={html:thrownError};processJSON(result,url);} });
+			).error(this.processError.bind(this));
+		}
+	}
+	
+	Plugin.prototype.processError = function(xhr, ajaxOptions, thrownError) {
+		if(xhr.status=='404') {
+			result={html:thrownError};
+			this.processJSON.bind(this);
+			this.processJSON(result);
 		}
 	}
 	

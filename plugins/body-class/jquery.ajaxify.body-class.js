@@ -3,10 +3,6 @@
 		firstCaching: function() {
 			var params = {body_classes: $('body').attr('class').split(' ')};
 		},
-		/*postParams: function() {
-			var params = {body_class: $('body').attr('class').split(' ')};
-			return params;
-		},*/
 		process: function(result) {
 			if(typeof result.body_classes !== 'undefined') {
 				$body = $('body');

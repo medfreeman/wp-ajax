@@ -8,7 +8,7 @@ if ( !function_exists('add_action') ) {
 /* 
  * Define Constants 
  */
-define( 'BODY_CLASS_AJAX_PLUGIN_UID', 'body-class' );
+define( 'BODY_CLASS_AJAX_PLUGIN_UID', 'wp-ajax-body-class' );
 define( 'BODY_CLASS_AJAX_PLUGIN_NAME', 'Body class support' );
 define( 'BODY_CLASS_AJAX_PLUGIN_JS', WP_AJAX_PLUGIN_URL . '/plugins/body-class/jquery.ajaxify.body-class.js' );
 
