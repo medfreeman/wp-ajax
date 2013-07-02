@@ -49,9 +49,10 @@
 		this.$loading = $([]);
 		
 		this.initialCachingFunctions = [];
+		this.beforeLoadFunctions = [];
 		this.postDataFunctions = [];
 		this.processFunctions = [];
-		this.beforeLoadFunctions = [];
+		this.afterFunctions = [];
         
         this._defaults = defaults;
         this._name = pluginName;
@@ -72,6 +73,7 @@
 		$.address.strict(false);
 		
 		/* Preserve context when $.address calls handler function */
+		/* TODO: Unbind address inside content after changing content */
 		$.address.change(this.address.bind(this));
 		
 		$(this.options.links_selector).address();
@@ -152,8 +154,6 @@
 				for(var i=0;i<this.beforeLoadFunctions.length;i++) {
 					this.beforeLoadFunctions[i]();
 				}
-				
-				beforeLoadFunctions
 				
 				this.properties.anim_finished=0;
 				
@@ -285,8 +285,18 @@
 		bindForms($container);*/
 
 		this.$loading.remove();
-
+		
+		this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));
+		/* OPTIMIZE: Permit two-ways animation / in - out */
 		this.$container.removeClass('out');
+	}
+	
+	Plugin.prototype.afterRender = function () {
+		this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender);
+		
+		for(var i=0;i<this.afterFunctions.length;i++) {
+			this.afterFunctions[i]();
+		}
 	}
 	
 	Plugin.prototype.addPlugin = function (plugin) {
@@ -301,6 +311,9 @@
 		}
 		if (typeof plugin.process === 'function') {
 			this.processFunctions.push(plugin.process);
+		}
+		if (typeof plugin.afterRender === 'function') {
+			this.afterFunctions.push(plugin.afterRender);
 		}
 	}
 	
