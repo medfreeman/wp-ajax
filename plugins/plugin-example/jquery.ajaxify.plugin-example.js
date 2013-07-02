@@ -13,6 +13,9 @@
 		},
 		process: function(result) {
 			
+		},
+		afterRender: function() {
+			
 		}
 	});
 })( jQuery );
