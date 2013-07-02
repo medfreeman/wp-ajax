@@ -4,7 +4,7 @@ if ( !function_exists('add_action') ) {
 	header('HTTP/1.1 403 Forbidden');
 	exit();
 }
-
+/* TODO: externalize plugin example */
 /* 
  * Define Constants 
  */
@@ -23,7 +23,7 @@ if ( !class_exists( 'WPAjaxPluginExample' ) ) {
 		function wp_ajax_plugin ( $plugin_list ) {
 			/* Register plugin */
 			$plugin_list[] = array(PLUGIN_EXAMPLE_AJAX_PLUGIN_UID, PLUGIN_EXAMPLE_AJAX_PLUGIN_NAME, array( &$this, 'wp_ajax_process' ), PLUGIN_EXAMPLE_AJAX_PLUGIN_JS, 
-			/* Optional js params array */ array('test' => 'test'));
+			/* Optional js params array */ array('test' => 'test'), /* Optional wordpress js dependencies (handlers) */ array('my-script-handle'));
 			return $plugin_list;
 		}
 		
