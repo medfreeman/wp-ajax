@@ -18,7 +18,8 @@
 			loading_html: '',
 			loading_position_container: '',
 			loading_position: '',
-			loading_test_mode: false
+			loading_test_mode: false,
+			no_cache: new Array()
 		};
 
     /* The actual plugin constructor */
@@ -147,7 +148,10 @@
 					args = $.extend({}, args, this.initialCachingFunctions[i]());
 				}
 				
-				this.properties.cache[ url ] = args;
+				if($.inArray(url, this.options.no_cache) < 0) {
+					console.log('has to be cached');
+					this.properties.cache[ url ] = args;
+				}
 			} else if (url) {
 				this.properties.url = url;
 
@@ -264,7 +268,9 @@
 	}
 	
 	Plugin.prototype.processJSON = function (result) {
-		this.properties.cache[this.properties.url]=result;
+		if($.inArray(this.properties.url, this.options.no_cache) < 0) {
+			this.properties.cache[this.properties.url]=result;
+		}
 		if(this.properties.anim_finished) {
 			this.showContent(result);
 		} else {

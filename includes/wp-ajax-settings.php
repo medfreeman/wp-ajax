@@ -109,6 +109,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
   
 			$sections = array();
 			$sections['cache_section']    = __('Cache', WP_AJAX_TEXTDOMAIN);
+			$sections['client_cache_section']    = __('Client cache', WP_AJAX_TEXTDOMAIN);
 			$sections['links_section']    = __('Links', WP_AJAX_TEXTDOMAIN);
 			$sections['jquery_section']    = __('jQuery', WP_AJAX_TEXTDOMAIN);  
 			$sections['loading_section']     = __('Loading animation', WP_AJAX_TEXTDOMAIN);
@@ -139,7 +140,17 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"desc"    => __( 'The number of template files modified and cached for ajax requests. Even if caching is disabled files exist (so they can be php include\'d), but are rewritten every request.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "caption",  
 				"std"     => $this->wpajax_num_cache_files(),  
-			); 
+			);
+			
+			$options[] = array(  
+				"section" => "client_cache_section",  
+				"id"      => WP_AJAX_SHORTNAME . "_client_cache_exceptions",  
+				"title"   => __( 'Client cache exceptions', WP_AJAX_TEXTDOMAIN ),  
+				"desc"    => __( 'Comma-separated list of relatives urls to ignore cache on ( ie: "products/" )', WP_AJAX_TEXTDOMAIN ),  
+				"type"    => "text",  
+				"std"     => '',  
+				"class"   => "nohtml"  
+			);  
 			
 			$options[] = array(  
 				"section" => "links_section",  

@@ -132,9 +132,11 @@ if ( !class_exists( 'WPAjax' ) ) {
 				$link_selector = $wpajax_options[WP_AJAX_SHORTNAME . "_links_selector"];
 				$loading_test_mode = $wpajax_options[WP_AJAX_SHORTNAME . "_loading_test_mode"];
 				
+				$no_cache_urls = explode(',', $wpajax_options[WP_AJAX_SHORTNAME . "_client_cache_exceptions"]);
+				
 				$loading_html = file_get_contents(dirname(__FILE__) . '/loading/' . $loading_transition . '/' . $loading_transition . '.html');
 				
-				wp_localize_script( 'jquery-wp-ajax', 'wpAjaxify', array( 'ajaxurl' => WP_AJAX_PLUGIN_URL . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'container_class'=> 'wp-ajax-container', 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loading_container, 'loading_html' => $loading_html, 'links_selector' => $link_selector, 'loading_test_mode' => $loading_test_mode, 'loading_position_container' => $loading_container_position_selector, 'loading_position' => $loading_position ));
+				wp_localize_script( 'jquery-wp-ajax', 'wpAjaxify', array( 'ajaxurl' => WP_AJAX_PLUGIN_URL . '/wp-ajax-client.php', 'baseurl'=> home_url().'/', 'container'=> $container, 'container_class'=> 'wp-ajax-container', 'pre_code' => $precode, 'post_code' => $postcode, 'loading_container' => $loading_container, 'loading_html' => $loading_html, 'links_selector' => $link_selector, 'loading_test_mode' => $loading_test_mode, 'loading_position_container' => $loading_container_position_selector, 'loading_position' => $loading_position, 'no_cache' => $no_cache_urls ));
 				wp_localize_script( WP_AJAX_SCRIPT_UID, 'wpAjax', array( 'js_fallback_url' => WP_AJAX_PLUGIN_URL . '/js/jsfallback' ) );
 				
 				wp_enqueue_style( 'wp-ajax-transition',  WP_AJAX_PLUGIN_URL . '/transitions/' . $transition . '/' . $transition . '.css');
