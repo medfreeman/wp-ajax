@@ -149,15 +149,10 @@
 				}
 				
 				if($.inArray(url, this.options.no_cache) < 0) {
-					console.log('has to be cached');
 					this.properties.cache[ url ] = args;
 				}
 			} else if (url) {
 				this.properties.url = url;
-
-				for(var i=0;i<this.beforeLoadFunctions.length;i++) {
-					this.beforeLoadFunctions[i]();
-				}
 				
 				this.properties.anim_finished=0;
 				
@@ -174,6 +169,10 @@
     
     Plugin.prototype.addPreloader = function () {
 		this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader);
+		
+		for(var i=0;i<this.beforeLoadFunctions.length;i++) {
+			this.beforeLoadFunctions[i]();
+		}
 		
 		this.$loading = $(stripslashes(this.options.loading_html));
 		this.$loading.css('position', 'absolute');
