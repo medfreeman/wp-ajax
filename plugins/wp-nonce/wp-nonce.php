@@ -26,7 +26,10 @@ if ( !class_exists( 'WPAjaxPluginNonceClass' ) ) {
 		}
 		
 		function wp_ajax_process ( $render_array ) {
-			check_ajax_referer(WP_NONCE_AJAX_PLUGIN_NONCE);
+			$nonce_passed = check_ajax_referer(WP_NONCE_AJAX_PLUGIN_NONCE, false, false);
+			if(!$nonce_passed) {
+				$render_array['html'] = __('Security error, please <a href="#" onClick="window.location.reload(true);">refresh</a> the page.', WP_AJAX_TEXTDOMAIN);
+			}
 			return $render_array;
 		}
 		

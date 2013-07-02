@@ -18,9 +18,7 @@
 			loading_html: '',
 			loading_position_container: '',
 			loading_position: '',
-			loading_test_mode: false,
-			pre_code: '',
-			post_code: ''
+			loading_test_mode: false
 		};
 
     /* The actual plugin constructor */
@@ -43,8 +41,7 @@
 			cache : {},
 			url: '',
 			plugins: [],
-			first: true,
-			postDataFunctions: new Array()
+			first: true
 		};
 		
 		this.$container = $(this.options.container);
@@ -54,6 +51,7 @@
 		this.initialCachingFunctions = [];
 		this.postDataFunctions = [];
 		this.processFunctions = [];
+		this.beforeLoadFunctions = [];
         
         this._defaults = defaults;
         this._name = pluginName;
@@ -151,9 +149,12 @@
 			} else if (url) {
 				this.properties.url = url;
 
-				if (this.options.pre_code != '') {
-					eval(stripslashes(this.options.pre_code));
+				for(var i=0;i<this.beforeLoadFunctions.length;i++) {
+					this.beforeLoadFunctions[i]();
 				}
+				
+				beforeLoadFunctions
+				
 				this.properties.anim_finished=0;
 				
 				this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));
@@ -279,10 +280,6 @@
 			this.processFunctions[i](result);
 		}
 		
-		if (this.options.post_code != '') {
-			eval(stripslashes(this.options.post_code));
-		}
-		
 		this.$container.find(this.options.links_selector).address();
 		/*alterForms($container);
 		bindForms($container);*/
@@ -295,6 +292,9 @@
 	Plugin.prototype.addPlugin = function (plugin) {
 		if (typeof plugin.firstCaching === 'function') {
 			this.initialCachingFunctions.push(plugin.firstCaching);
+		}
+		if (typeof plugin.beforeLoad === 'function') {
+			this.beforeLoadFunctions.push(plugin.beforeLoad);
 		}
 		if (typeof plugin.postParams === 'function') {
 			this.postDataFunctions.push(plugin.postParams);

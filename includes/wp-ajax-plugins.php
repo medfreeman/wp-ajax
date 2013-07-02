@@ -19,6 +19,7 @@ if ( !class_exists( 'WPAjaxPlugins' ) ) {
 			$this->plugin_array = array();
 			$this->plugin_names = array();
 			
+			/* OPTIMIZE: add plugin order */
 			$this->plugin_array = apply_filters( WP_AJAX_PLUGIN_LIST_HOOK, $this->plugin_array );
 
 			foreach ($this->plugin_array as $plugin) {

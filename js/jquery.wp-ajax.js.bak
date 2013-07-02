@@ -45,7 +45,6 @@
 		$form.each(function(index){
 			$this = $(this);
 			$this.attr("action","");
-			/* TODO : Add hash (location) support) */
 			/*action = $this.attr("action");
 			$this.attr("action",action.substring(action.indexOf("#")));*/
 		});
@@ -194,7 +193,6 @@
 							plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
 							if(typeof(plugin_object.process) != "undefined") {
 								plugin_object.process.call(this, wp_ajax.cache[ url ]);
-								/* TODO:: EXTEND $args */
 							}
 						}
 			} else {
@@ -209,10 +207,8 @@
 					plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
 					if(typeof(plugin_object.postParams) != "undefined") {
 						$arg = plugin_object.postParams.call();
-						/* TODO:: EXTEND $args */
 					}
 				}
-				/* TODO:: EXTEND $args with defaults*/
 				$.post(
 					wpAjax.ajaxurl,
 					{
@@ -223,7 +219,6 @@
 							plugin_object = $.wp_ajax.plugins[wpAjax.plugins[plugin]];
 							if(typeof(plugin_object.process) != "undefined") {
 								plugin_object.process.call(this, result);
-								/* TODO:: EXTEND $args */
 							}
 						}
 						processJSON(result,url);

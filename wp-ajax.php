@@ -166,7 +166,6 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 		
 		function wpajax_get_query(&$query_vars) {
-			/* TODO : Implement nonces */
 			if(isset($query_vars->extra_query_vars['ajax'])) {
 				wp();
 				
