@@ -7,12 +7,14 @@
 ;(function ( $, undefined ) {
     $('body').ajaxify(wpAjaxify, function(cssTransitions, cssAnimations){
 		scripts = [];
+		
 		if(!cssTransitions) {
 			scripts.push(wpAjax.js_fallback_url + '/transitionsHelper.js')
 		}
 		if(!cssAnimations) {
 			scripts.push(wpAjax.js_fallback_url + '/animationsHelper.js')
 		}
+		
 		scripts.push(wpAjax.js_fallback_url + '/jsfallback-master.js');
 		
 		loadScripts(scripts);

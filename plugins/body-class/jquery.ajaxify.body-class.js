@@ -25,8 +25,6 @@
 					}
 				}
 				
-				console.log('old: ' + old_classes + ' / new: ' + new_classes + ' / rem : ' + body_classes_to_remove + ' / add : ' + body_classes_to_add);
-				
 				$body.removeClass(body_classes_to_remove.join(' '));
 				$body.addClass(body_classes_to_add.join(' '));
 			}
