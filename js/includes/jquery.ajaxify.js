@@ -291,8 +291,12 @@
 
 		this.$loading.remove();
 		
-		this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));
 		/* OPTIMIZE: Permit two-ways animation / in - out */
+		this.$container.imagesLoaded(this.transitionOut.bind(this));
+	}
+	
+	Plugin.prototype.transitionOut = function () {
+		this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));
 		this.$container.removeClass('out');
 	}
 	
