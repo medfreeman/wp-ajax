@@ -170,26 +170,6 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"type"    => "text",  
 				"std"     => '#content',  
 				"class"   => "nohtml"  
-			);  
-			
-			$options[] = array(  
-				"section" => "jquery_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_custom_pre_code",  
-				"title"   => __( 'Custom jquery code (before ajax request)', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Custom code to execute before the ajax request for the content is made.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks"
-			);
-			
-			$options[] = array(  
-				"section" => "jquery_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_custom_post_code",  
-				"title"   => __( 'Custom jquery code (after ajax request)', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Custom code to execute after the ajax request for the content is made.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks"
 			);
 			
 			$options[] = array(  

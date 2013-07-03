@@ -42,7 +42,7 @@
 			cache : {},
 			url: '',
 			plugins: [],
-			first: true
+			first: 2
 		};
 		
 		this.$container = $(this.options.container);
@@ -124,22 +124,26 @@
 		}
     }
     
+    Plugin.prototype.relativeUrl = function(url) {
+		/* Absolute Link clicked */
+		if (url.startsWith(this.options.baseurl)) {
+			url = url.substr(this.options.baseurl.length);
+			if(url == '') {
+				url = '/';
+			}
+		};
+		return url;
+	}
+    
     Plugin.prototype.address = function(event) {
 		if (event.value) {
-			var url = event.value;
-
-			/* Link clicked */
-			if (url.startsWith(this.options.baseurl)) {
-				url = url.substr(this.options.baseurl.length);
-				if(url == '') {
-					url = '/';
-				}
-				this.properties.first = false;
-			};
+			var url = this.relativeUrl(event.value);
 			
-			if(this.properties.first) {
+			if(this.properties.first === 2) {
+				console.log('FIRST');
+				
 				/* Remove beginning slash */
-				while (url.substring(0, 1) === "/") {
+				if (url !== '/' && url.substring(0, 1) === "/") {
 					url = url.substring(1);
 				}
 
@@ -151,7 +155,16 @@
 				if($.inArray(url, this.options.no_cache) < 0) {
 					this.properties.cache[ url ] = args;
 				}
-			} else if (url) {
+				
+				this.properties.first = 1;
+			} else if(this.properties.first === 1) {
+				var currentUrl = this.relativeUrl(window.location.href);
+				if(url !== currentUrl) {
+					this.properties.first = 0;
+				}
+			}
+			
+			if (!this.properties.first && url) {
 				this.properties.url = url;
 				
 				this.properties.anim_finished=0;
@@ -355,7 +368,7 @@
 	
 	/* 'External link' jQuery selector */ 
 	$.expr[':'].external = function(obj){
-		return !obj.href.match(/^mailto\:/)
+		return (typeof obj.href !== 'undefined') && !obj.href.match(/^mailto\:/)
 				&& (obj.hostname != location.hostname);
 	};
 	
