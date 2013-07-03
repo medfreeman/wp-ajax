@@ -17,7 +17,7 @@ if ( !class_exists( 'WPAjaxPluginExample' ) ) {
 		
 		function __construct() {
 			/* Register plugin function to wp-ajax plugins filter */
-			add_filter( WP_AJAX_PLUGIN_LIST_HOOK, array(&$this, 'wp_ajax_plugin'));
+			add_filter( 'wp-ajax-plugin-list', array(&$this, 'wp_ajax_plugin'));
 		}
 		
 		function wp_ajax_plugin ( $plugin_list ) {
