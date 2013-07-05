@@ -4,7 +4,7 @@ if ( !function_exists('add_action') ) {
 	header('HTTP/1.1 403 Forbidden');
 	exit();
 }
-/* TODO : Remove duplicate saving message in admin */
+
 /* 
  * Define Constants 
  */
@@ -115,8 +115,8 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 			$sections['loading_section']     = __('Loading animation', WP_AJAX_TEXTDOMAIN);
 			$sections['transition_section']     = __('Transition animation', WP_AJAX_TEXTDOMAIN);
 			$sections['forms_section']     = __('Forms', WP_AJAX_TEXTDOMAIN);
-			$sections['plugin_support_section']     = __('Plugin Support', WP_AJAX_TEXTDOMAIN);
 			$sections['plugins_section']     = __('Plugins', WP_AJAX_TEXTDOMAIN);
+			/* TODO : Import /Export Settings */
 			//$sections['export_section']     = __('Import / Export settings', WP_AJAX_TEXTDOMAIN);
 		  
 			return $sections;  
@@ -221,38 +221,6 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"choices" => $this->wpajax_get_loading_position_options()
 			);
 			
-			/*$options[] = array(  
-				"section" => "loading_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_loading_container_wrapper",  
-				"title"   => __( 'Loading container HTML Code', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'The HTML code used as loading animation. Allowed tags : &lt;div>, &lt;span>', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"attr"	  => "readonly"
-			);
-			
-			$options[] = array(  
-				"section" => "loading_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_loading_css",  
-				"title"   => __( 'Custom loading animation css code', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Enter loading animation css code, use css3 animations to animate.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks",
-				"attr"	  => "readonly"
-			);
-			
-			$options[] = array(  
-				"section" => "loading_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_loading_js",  
-				"title"   => __( 'Custom loading animation jquery code', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Enter loading animation jquery code (use the function \'animatePreloader\'), used as fallback if css3 animation isn\'t supported in the client\'s browser.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks",
-				"attr"	  => "readonly"
-			);*/
-			
 			$options[] = array(  
 				"section" => "transition_section",  
 				"id"      => WP_AJAX_SHORTNAME . "_transition_graphics",  
@@ -263,28 +231,6 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"choices" => $this->wpajax_get_transition_options()
 			);
 			
-			/*$options[] = array(  
-				"section" => "transition_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_transition_js",  
-				"title"   => __( 'Custom transition animation jquery code (OUT)', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Enter transition animation jquery code for content disappearing. Use the function \'addPreloader\' as callback.', WP_AJAX_TEXTDOMAIN ).'<br/>'.__( 'You can use wpAjax.container or wpAjax.loading_container as container element.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks",
-				"attr"	  => "readonly"
-			);
-			
-			$options[] = array(  
-				"section" => "transition_section",  
-				"id"      => WP_AJAX_SHORTNAME . "_transition_js_in",  
-				"title"   => __( 'Custom transition animation jquery code (IN)', WP_AJAX_TEXTDOMAIN ),  
-				"desc"    => __( 'Enter transition animation jquery code for content reappearing.', WP_AJAX_TEXTDOMAIN ).'<br/>'.__( 'You can use wpAjax.container or wpAjax.loading_container as container element.', WP_AJAX_TEXTDOMAIN ),  
-				"type"    => "textarea",  
-				"std"     => '',
-				"class"   => "allowlinebreaks",
-				"attr"	  => "readonly"
-			);*/
-			
 			$options[] = array(  
 				"section" => "transition_section",  
 				"id"      => WP_AJAX_SHORTNAME . "_last_tab",  
@@ -293,12 +239,12 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"std"     => 0
 			);
 			
-			
 			$plugin_list = "";
 			global $wpajaxplugins;
 			foreach ($wpajaxplugins->get_plugin_names() as $plugin) {
 				$plugin_list .= $plugin."<br/>";
 			}
+			
 			$options[] = array(  
 				"section" => "plugins_section",  
 				"id"      => WP_AJAX_SHORTNAME . "_plugin_list",  
@@ -463,6 +409,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		  
 			return $options;
 		}
+		
 		function wpajax_create_settings_field( $args = array() ) {  
 			// default array to overwrite when calling the function  
 			$defaults = array(  
@@ -493,9 +440,11 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		  
 			add_settings_field( $id, $title, array($this, 'wpajax_form_field_fn'), __FILE__, $section, $field_args );
 		}
+		
 		function  wpajax_section_fn($desc) {
 			//echo "<div>" . __('Settings for this section',WP_AJAX_TEXTDOMAIN) . "</div>";  
 		}
+		
 		/* 
 		 * Form Fields HTML 
 		 * All form field types share the same function!! 
@@ -613,6 +562,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				break;  
 			}  
 		}
+		
 		function wpajax_validate_options($input) {  
 			// for enhanced security, create a new empty array  
 			$valid_input = array();  
@@ -898,6 +848,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				}
 		return $valid_input; // return validated input  
 		}
+		
 		/** 
 		 * Helper function for creating admin messages 
 		 * src: http://www.wprecipes.com/how-to-show-an-urgent-message-in-the-wordpress-admin-area 
@@ -909,6 +860,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		function wpajax_show_msg($message, $msgclass = 'info') {
 			echo "<div id='message' class='$msgclass'><p>$message</p></div>";
 		}
+		
 		 /** 
 		 * Callback function for displaying admin messages 
 		 * 
@@ -925,7 +877,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 		  
 				// have our settings succesfully been updated?  
 				if($set_errors[0]['code'] == 'settings_updated' && isset($_GET['settings-updated'])){  
-					$this->wpajax_show_msg("<p>" . $set_errors[0]['message'] . "</p>", 'updated');  
+					//$this->wpajax_show_msg("<p>" . $set_errors[0]['message'] . "</p>", 'updated');  
 		  
 				// have errors been found?  
 				}else{  
