@@ -2,6 +2,7 @@
  * jQuery ajaxify plugin
  * Author: mehdi.lahlou@free.fr
  * Licensed under GPLv2 license
+ * Requires jquery v1.7.2 min (http://www.jquery.com), jquery address v1.5 min (http://www.asual.com/jquery/address/), imagesloaded v3.0.1 min (https://github.com/desandro/imagesloaded), transitionEnd (https://github.com/EvandroLG/transitionEnd)
  */
 
 ;(function ( $, window, document, undefined ) {
@@ -169,7 +170,8 @@
 				
 				this.properties.anim_finished=0;
 				
-				this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));
+				transitionEnd(this.$container).bind(this.addPreloader.bind(this));
+				/*this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));*/
 				
 				this.$container.addClass('out');
 				
@@ -181,7 +183,8 @@
 	}
     
     Plugin.prototype.addPreloader = function () {
-		this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader);
+		transitionEnd(this.$container).unbind(this.addPreloader);
+		/*this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader);*/
 		
 		for(var i=0;i<this.beforeLoadFunctions.length;i++) {
 			this.beforeLoadFunctions[i]();
@@ -309,12 +312,14 @@
 	}
 	
 	Plugin.prototype.transitionOut = function () {
-		this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));
+		transitionEnd(this.$container).bind(this.afterRender.bind(this));
+		/*this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));*/
 		this.$container.removeClass('out');
 	}
 	
 	Plugin.prototype.afterRender = function () {
-		this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender);
+		transitionEnd(this.$container).unbind(this.afterRender);
+		/*this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender);*/
 		
 		for(var i=0;i<this.afterFunctions.length;i++) {
 			this.afterFunctions[i]();
