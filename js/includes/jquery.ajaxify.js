@@ -43,7 +43,9 @@
 			cache : {},
 			url: '',
 			plugins: [],
-			first: 2
+			first: 2,
+			processing: false,
+			last_url: ''
 		};
 		
 		this.$container = $(this.options.container);
@@ -165,7 +167,11 @@
 				}
 			}
 			
-			if (!this.properties.first && url) {
+			if (this.properties.processing) {
+				this.properties.last_url = url;
+			} else if (!this.properties.processing && !this.properties.first && url) {
+				this.properties.processing = true;
+				
 				this.properties.url = url;
 				
 				this.properties.anim_finished=0;
@@ -323,6 +329,14 @@
 		
 		for(var i=0;i<this.afterFunctions.length;i++) {
 			this.afterFunctions[i]();
+		}
+		
+		this.properties.processing = false;
+		
+		if(this.properties.last_url !== '') {
+			this.address.bind(this);
+			this.address({value: this.properties.last_url});
+			this.properties.last_url = '';
 		}
 	}
 	
