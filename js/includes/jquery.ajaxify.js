@@ -135,6 +135,9 @@
 				url = '/';
 			}
 		};
+		if (url.startsWith('/')) {
+			url = url.substr(1);
+		}
 		return url;
 	}
     
