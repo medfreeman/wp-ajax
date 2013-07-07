@@ -131,11 +131,11 @@
 		/* Absolute Link clicked */
 		if (url.startsWith(this.options.baseurl)) {
 			url = url.substr(this.options.baseurl.length);
-			if(url == '') {
-				url = '/';
-			}
 		};
-		if (url.startsWith('/')) {
+		if(url === '') {
+			url = '/';
+		} 
+		if (url !== '/' && url.startsWith('/')) {
 			url = url.substr(1);
 		}
 		return url;
