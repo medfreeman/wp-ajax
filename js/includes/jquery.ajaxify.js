@@ -45,7 +45,8 @@
 			plugins: [],
 			first: 2,
 			processing: false,
-			last_url: ''
+			last_url: '',
+			prefix: this.options.baseurl.split(window.location.hostname)[1]
 		};
 		
 		this.$container = $(this.options.container);
@@ -132,6 +133,9 @@
 		if (url.startsWith(this.options.baseurl)) {
 			url = url.substr(this.options.baseurl.length);
 		};
+		if(url.startsWith(this.properties.prefix)) {
+			url = url.substr(this.properties.prefix.length);
+		}
 		if(url === '') {
 			url = '/';
 		} 
@@ -146,12 +150,6 @@
 			var url = this.relativeUrl(event.value);
 			
 			if(this.properties.first === 2) {
-				console.log('FIRST');
-				
-				/* Remove beginning slash */
-				if (url !== '/' && url.substring(0, 1) === "/") {
-					url = url.substring(1);
-				}
 
 				var args = { html: this.$container.html() }
 				for(var i=0;i<this.initialCachingFunctions.length;i++) {
