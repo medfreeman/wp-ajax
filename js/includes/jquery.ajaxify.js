@@ -2,7 +2,7 @@
  * jQuery ajaxify plugin
  * Author: mehdi.lahlou@free.fr
  * Licensed under GPLv2 license
- * Requires jquery v1.7.2 min (http://www.jquery.com), jquery address v1.5 min (http://www.asual.com/jquery/address/), imagesloaded v3.0.1 min (https://github.com/desandro/imagesloaded), transitionEnd (https://github.com/EvandroLG/transitionEnd)
+ * Requires jquery v1.7.2 min (http://www.jquery.com), jquery address v1.5 min (http://www.asual.com/jquery/address/), imagesloaded v3.0.1 min (https://github.com/desandro/imagesloaded), transition-events v0.2.1 min (https://github.com/ai/transition-events)
  */
 
 ;(function ( $, window, document, undefined ) {
@@ -177,8 +177,7 @@
 				
 				this.properties.anim_finished=0;
 				
-				transitionEnd(this.$container).bind(this.addPreloader.bind(this));
-				/*this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader.bind(this));*/
+				this.$container.afterTransition(this.addPreloader.bind(this));
 				
 				this.$container.addClass('out');
 				
@@ -190,8 +189,6 @@
 	}
     
     Plugin.prototype.addPreloader = function () {
-		transitionEnd(this.$container).unbind(this.addPreloader);
-		/*this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.addPreloader);*/
 		
 		for(var i=0;i<this.beforeLoadFunctions.length;i++) {
 			this.beforeLoadFunctions[i]();
@@ -319,15 +316,11 @@
 	}
 	
 	Plugin.prototype.transitionOut = function () {
-		transitionEnd(this.$container).bind(this.afterRender.bind(this));
-		/*this.$container.one('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender.bind(this));*/
+		this.$container.afterTransition(this.afterRender.bind(this));
 		this.$container.removeClass('out');
 	}
 	
 	Plugin.prototype.afterRender = function () {
-		transitionEnd(this.$container).unbind(this.afterRender);
-		/*this.$container.unbind('webkitTransitionEnd mozTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',this.afterRender);*/
-		
 		for(var i=0;i<this.afterFunctions.length;i++) {
 			this.afterFunctions[i]();
 		}
