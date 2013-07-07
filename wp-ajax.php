@@ -244,7 +244,8 @@ if ( !class_exists( 'WPAjax' ) ) {
 		}
 		
 		function wpajax_create_template_file($file,$content) {
-			if(!$fh = fopen($file, 'w')){
+			/* TODO: Add check for cache folder permissions */
+			if(!$fh = @fopen($file, 'w')){
 				return false;
 			}
 			fwrite($fh, $content);
