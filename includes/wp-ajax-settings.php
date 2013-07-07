@@ -158,7 +158,7 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 				"title"   => __( 'Links Selector', WP_AJAX_TEXTDOMAIN ),  
 				"desc"    => __( 'The jquery selector(s) of links which have to be converted.', WP_AJAX_TEXTDOMAIN ),  
 				"type"    => "text",  
-				"std"     => 'a:not(external):not(.no-ajax):not(.ab-item)',  
+				"std"     => 'a:not(:external):not(.no-ajax):not(.ab-item)',  
 				"class"   => "nohtml"  
 			);  
 			
