@@ -73,6 +73,9 @@
 		
 		this.$container.addClass(this.options.container_class);
 		if (Detect.css3dTransforms) {
+			this.$container.css('-webkit-transform', 'translate3d(0,0,0)');
+			this.$container.css('-moz-transform', 'translate3d(0,0,0)');
+			this.$container.css('-ms-transform', 'translate3d(0,0,0)');
 			this.$container.css('transform', 'translate3d(0,0,0)');
 		}
 		
@@ -438,10 +441,35 @@
 			delete div;
 			return ext;
 		};
+		function has3d() {
+			var el = document.createElement('p'), 
+				has3d,
+				transforms = {
+					'webkitTransform':'-webkit-transform',
+					'OTransform':'-o-transform',
+					'msTransform':'-ms-transform',
+					'MozTransform':'-moz-transform',
+					'transform':'transform'
+				};
+
+			// Add it to the body to get the computed style.
+			document.body.insertBefore(el, null);
+
+			for (var t in transforms) {
+				if (el.style[t] !== undefined) {
+					el.style[t] = "translate3d(1px,1px,1px)";
+					has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+				}
+			}
+
+			document.body.removeChild(el);
+
+			return (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+		};
 		return {
 			"cssTransitions" : Modernizr.csstransitions,
 			"cssAnimations" : Modernizr.cssanimations,
-			"css3dTransforms" : Modernizr.csstransforms3d,
+			"css3dTransforms" : has3d(),
 			"pushState" : Modernizr.history
 		};
 	}());
