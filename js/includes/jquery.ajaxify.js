@@ -213,6 +213,9 @@
 		this.$loading.css('transform', 'translate3d(0,0,0)');
 		
 		$loading_position_container = $(this.options.loading_position_container);
+		if($loading_position_container.length === 0) {
+			$loading_position_container = this.$container;
+		}
 		
 		var pos = new Array();
 		pos = this.options.loading_position.split("-");
@@ -289,7 +292,7 @@
 	
 	Plugin.prototype.processError = function(xhr, ajaxOptions, thrownError) {
 		if(xhr.status=='404') {
-			result={html:thrownError};
+			result={html:xhr.responseText.html};
 			this.processJSON.bind(this);
 			this.processJSON(result);
 		}
