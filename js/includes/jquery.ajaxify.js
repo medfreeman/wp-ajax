@@ -292,7 +292,7 @@
 	
 	Plugin.prototype.processError = function(xhr, ajaxOptions, thrownError) {
 		if(xhr.status=='404') {
-			result={html:xhr.responseText.html};
+			result=JSON.parse(xhr.responseText);
 			this.processJSON.bind(this);
 			this.processJSON(result);
 		}
