@@ -72,7 +72,9 @@
         /* and this.options */
 		
 		this.$container.addClass(this.options.container_class);
-		this.$container.css('transform', 'translate3d(0,0,0)');
+		if (Detect.css3dTransforms) {
+			this.$container.css('transform', 'translate3d(0,0,0)');
+		}
 		
 		if(!Detect.pushState) {
 			return;
@@ -439,6 +441,7 @@
 		return {
 			"cssTransitions" : Modernizr.csstransitions,
 			"cssAnimations" : Modernizr.cssanimations,
+			"css3dTransforms" : Modernizr.csstransforms3d,
 			"pushState" : Modernizr.history
 		};
 	}());
