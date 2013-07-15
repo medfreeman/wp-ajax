@@ -108,7 +108,8 @@ if ( !class_exists( 'WPAjax' ) ) {
 			wp_register_script('jquery-address',WP_AJAX_PLUGIN_URL . '/js/includes/jquery.address-1.5.min.js', array('jquery'), false, true );
 			wp_register_script('jquery-imagesloaded',WP_AJAX_PLUGIN_URL . '/js/includes/imagesloaded.pkgd.min.js', array('jquery'), false, true );
 			wp_register_script('jquery-form', WP_AJAX_PLUGIN_URL . '/js/includes/jquery.form.js', array('jquery'), false, true );
-			wp_register_script('jquery-ajaxify', WP_AJAX_PLUGIN_URL . '/js/includes/jquery.ajaxify.js', array('transition-events', 'jquery','jquery-address','jquery-form','jquery-imagesloaded'), false, true );
+			wp_register_script('modernizr-custom-ajaxify', WP_AJAX_PLUGIN_URL . '/js/includes/modernizr-custom.min.js', array('jquery'), false, true );
+			wp_register_script('jquery-ajaxify', WP_AJAX_PLUGIN_URL . '/js/includes/jquery.ajaxify.js', array('transition-events', 'jquery','jquery-address','jquery-form','jquery-imagesloaded','modernizr-custom-ajaxify'), false, true );
 			wp_register_script(WP_AJAX_SCRIPT_UID, WP_AJAX_PLUGIN_URL . '/js/jquery.wp-ajax.js', array('transition-events','jquery-ajaxify', 'jquery','jquery-address','jquery-form', 'jquery-imagesloaded'), false, true );
 			
 			if (!is_admin()) {

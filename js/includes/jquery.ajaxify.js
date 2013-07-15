@@ -74,6 +74,10 @@
 		this.$container.addClass(this.options.container_class);
 		this.$container.css('transform', 'translate3d(0,0,0)');
 		
+		if(!Detect.pushState) {
+			return;
+		}
+		
 		$.address.state('/');
 		$.address.strict(false);
 		
@@ -433,8 +437,9 @@
 			return ext;
 		};
 		return {
-			"cssTransitions" : cssProperty('Transition'),
-			"cssAnimations" : cssProperty('Animation')
+			"cssTransitions" : Modernizr.csstransitions,
+			"cssAnimations" : Modernizr.cssanimations,
+			"pushState" : Modernizr.history
 		};
 	}());
 
