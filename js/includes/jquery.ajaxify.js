@@ -213,9 +213,6 @@
 		this.$loading.css('transform', 'translate3d(0,0,0)');
 		
 		$loading_position_container = $(this.options.loading_position_container);
-		if($loading_position_container.length === 0) {
-			$loading_position_container = this.$container;
-		}
 		
 		var pos = new Array();
 		pos = this.options.loading_position.split("-");
@@ -292,7 +289,7 @@
 	
 	Plugin.prototype.processError = function(xhr, ajaxOptions, thrownError) {
 		if(xhr.status=='404') {
-			result=JSON.parse(xhr.responseText);
+			result={html:thrownError};
 			this.processJSON.bind(this);
 			this.processJSON(result);
 		}
@@ -323,7 +320,7 @@
 
 		this.$loading.remove();
 		
-		/* OPTIMIZE: Permit two-ways animation / in - out */
+		/* OPTIMIZE: Permit two-ways animation / in - out - for now only uses out, and triggers reverted transition by removing 'out' class on new content */
 		this.$container.imagesLoaded(this.transitionOut.bind(this));
 	}
 	

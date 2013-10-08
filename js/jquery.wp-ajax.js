@@ -9,9 +9,11 @@
 		scripts = [];
 		
 		if(!cssTransitions) {
+			alert('no transitions');
 			scripts.push(wpAjax.js_fallback_url + '/transitionsHelper.js')
 		}
 		if(!cssAnimations) {
+			alert('no animations');
 			scripts.push(wpAjax.js_fallback_url + '/animationsHelper.js')
 		}
 		

@@ -14,14 +14,18 @@
 				var body_classes_to_add = new Array();
 				
 				for(var i=0;i<old_classes.length;i++) {
-					if($.inArray(old_classes[i], new_classes) < 0) {
-						 body_classes_to_remove.push(old_classes[i]);
+					for(var j in new_classes) {
+						if(old_classes[i] !== new_classes[j]) {
+							 body_classes_to_remove.push(old_classes[i]);
+						}
 					}
 				}
 				
-				for(var i=0;i<new_classes.length;i++) {
-					if($.inArray(new_classes[i], old_classes) < 0) {
-						body_classes_to_add.push(new_classes[i]);
+				for(var k in new_classes) {
+					if(new_classes.hasOwnProperty(k)) {
+						if($.inArray(new_classes[k], old_classes) < 0) {
+							body_classes_to_add.push(new_classes[k]);
+						}
 					}
 				}
 				
