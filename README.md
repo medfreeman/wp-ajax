@@ -6,7 +6,7 @@ Description: Ajaxify wordpress
 
 Author: Mehdi Lahlou
 
-~Current Version:1.1.2~
+~Current Version:1.1.1~
 
 Author URI: http://www.ork.ch/
 
