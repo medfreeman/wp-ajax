@@ -90,6 +90,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 			require_once('plugins/body-class/body-class.php');
 			require_once('plugins/wp-nonce/wp-nonce.php');
 			require_once('plugins/comprehensive-google-maps/comprehensive-google-maps.php');
+			require_once('plugins/contact-form-7/contact-form-7.php');
 			
 			require_once('includes/wp-ajax-plugins.php');
 			if (is_admin()) {

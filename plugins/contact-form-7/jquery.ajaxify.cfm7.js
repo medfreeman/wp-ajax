@@ -12,12 +12,12 @@
 
 	$('body').ajaxify('addPlugin', {
 		firstCaching: function() {
-			var params = {has_map: ($('body').find('.google-map-placeholder').length > 0)};
+			var params = {has_contact: ($('body').find('.wpcf7-form').length > 0)};
 			return params;
 		},
 		process: function(result) {
-			if (typeof result.has_map != 'undefined' && result.has_map) {
-				$.cachedScript( wpAjaxComprehensiveGoogleMaps.script ).done(function( script, textStatus ) {
+			if (typeof result.has_contact != 'undefined' && result.has_contact) {
+				$.cachedScript( wpAjaxContactForm7.script ).done(function( script, textStatus ) {
 					
 				});
 			}

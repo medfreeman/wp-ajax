@@ -321,7 +321,6 @@
 
 		this.$loading.remove();
 		
-		/* OPTIMIZE: Permit two-ways animation / in - out - for now only uses out, and triggers reverted transition by removing 'out' class on new content */
 		this.$container.imagesLoaded(this.transitionOut.bind(this));
 	}
 	

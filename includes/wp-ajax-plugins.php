@@ -23,18 +23,19 @@ if ( !class_exists( 'WPAjaxPlugins' ) ) {
 			/* OPTIMIZE: add plugin options */
 			/* TODO: add plugin js dependencies */
 			$this->plugin_array = apply_filters( WP_AJAX_PLUGIN_LIST_HOOK, $this->plugin_array );
-
+			
 			foreach ($this->plugin_array as $plugin) {
 				$this->plugin_names[] = $plugin[1];
 				add_filter( WP_AJAX_PLUGIN_RENDER_HOOK, $plugin[2] );
-				/* TODO : Sanitize plugin input */
 			}
 			
-			add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_scripts') );
+			add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_scripts'), 200 );
 		}
 		
 		function enqueue_scripts() {
+
 			foreach ($this->plugin_array as $plugin) {
+				/* TODO : Sanitize plugin input */
 				wp_register_script($plugin[0], $plugin[3], array(WP_AJAX_SCRIPT_UID), false, true);
 			}
 			if (!is_admin()) {

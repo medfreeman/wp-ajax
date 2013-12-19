@@ -8,7 +8,7 @@ if ( !function_exists('add_action') ) {
 /* 
  * Define Constants 
  */
-define( 'CGM_AJAX_PLUGIN_UID', 'comprehensive-google-maps' );
+define( 'CGM_AJAX_PLUGIN_UID', 'wp-ajax-comprehensive-google-maps' );
 define( 'CGM_AJAX_PLUGIN_NAME', 'Comprehensive google maps plugin support' );
 define( 'CGM_AJAX_PLUGIN_JS', WP_AJAX_PLUGIN_URL . '/plugins/comprehensive-google-maps/jquery.ajaxify.cgm.js' );
 
@@ -28,7 +28,7 @@ if ( !class_exists( 'WPAjaxPluginCGMClass' ) ) {
 		function wp_ajax_plugin ( $plugin_list ) {
 			global $wp_scripts;
 			$cgm_script = $wp_scripts->registered['cgmp-google-map-orchestrator-framework']->src;
-			$plugin_list[] = array(CGM_AJAX_PLUGIN_UID, CGM_AJAX_PLUGIN_NAME, array( &$this, 'wp_ajax_process' ), CGM_AJAX_PLUGIN_JS, array('cgm_script' => $cgm_script));
+			$plugin_list[] = array(CGM_AJAX_PLUGIN_UID, CGM_AJAX_PLUGIN_NAME, array( &$this, 'wp_ajax_process' ), CGM_AJAX_PLUGIN_JS, array('script' => $cgm_script));
 			return $plugin_list;
 		}
 		
