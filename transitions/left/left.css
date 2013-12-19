@@ -1,11 +1,18 @@
 .wp-ajax-container {
-	 -webkit-transition: left 1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-     -moz-transition: left 1s ease-out;  /* Firefox 4-15 */
-       -o-transition: left 1s ease-out;  /* Opera 10.50–12.00 */
-          transition: left 1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
      left: 0;
 }
 
+.wp-ajax-container.trans {
+	-webkit-transition: left 1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+     -moz-transition: left 1s ease-out;  /* Firefox 4-15 */
+       -o-transition: left 1s ease-out;  /* Opera 10.50–12.00 */
+          transition: left 1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
 .wp-ajax-container.out {
-	left: -300px;
+	left: -100%;
+}
+
+.wp-ajax-container.in {
+	left: 100%!important;
 }

@@ -898,9 +898,10 @@ if ( !class_exists( 'WPAjaxSettings' ) ) {
 			}
 		}
 		function wpajax_num_cache_files() {
-			if (glob(WP_AJAX_CACHE_DIR . "*.php") != false)
+			$cached_files = glob(WP_AJAX_CACHE_DIR . "/*.php");
+			if ($cached_files && sizeof($cached_files))
 			{
-				return count(glob(WP_AJAX_CACHE_DIR . "*.php"));
+				return sizeof($cached_files);
 			}
 			return 0;
 		}

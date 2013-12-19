@@ -188,6 +188,7 @@
 				
 				this.$container.afterTransition(this.addPreloader.bind(this));
 				
+				this.$container.addClass('trans');
 				this.$container.addClass('out');
 				
 				this.properties.content_received=0;
@@ -325,8 +326,17 @@
 	}
 	
 	Plugin.prototype.transitionOut = function () {
-		this.$container.afterTransition(this.afterRender.bind(this));
+		this.$container.removeClass('trans');
+		this.$container.addClass('in');
 		this.$container.removeClass('out');
+		this.transitionOutEnd.bind(this);
+		this.transitionOutEnd();
+	}
+	
+	Plugin.prototype.transitionOutEnd = function () {
+		this.$container.afterTransition(this.afterRender.bind(this));
+		this.$container.addClass('trans');
+		this.$container.removeClass('in');
 	}
 	
 	Plugin.prototype.afterRender = function () {

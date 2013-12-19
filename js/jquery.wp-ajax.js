@@ -9,17 +9,16 @@
 		scripts = [];
 		
 		if(!cssTransitions) {
-			alert('no transitions');
 			scripts.push(wpAjax.js_fallback_url + '/transitionsHelper.js')
 		}
 		if(!cssAnimations) {
-			alert('no animations');
 			scripts.push(wpAjax.js_fallback_url + '/animationsHelper.js')
 		}
 		
-		scripts.push(wpAjax.js_fallback_url + '/jsfallback-master.js');
-		
-		loadScripts(scripts);
+		if(!cssTransitions || !cssAnimations) {
+			scripts.push(wpAjax.js_fallback_url + '/jsfallback-master.js');
+			loadScripts(scripts);
+		}
 	});
 	
 	function loadScripts(scripts, index) {

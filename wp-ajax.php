@@ -75,7 +75,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 					'zip_url' => 'https://github.com/medfreeman/wp-ajax/zipball/master', // the zip url of the github repo
 					'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
 					'requires' => '3.5', // which version of WordPress does your plugin require?
-					'tested' => '3.5.2', // which version of WordPress is your plugin tested up to?
+					'tested' => '3.8', // which version of WordPress is your plugin tested up to?
 					'readme' => 'README.md', // which file to use as the readme for the version number
 					'access_token' => '' // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
 				);
@@ -89,6 +89,7 @@ if ( !class_exists( 'WPAjax' ) ) {
 			
 			require_once('plugins/body-class/body-class.php');
 			require_once('plugins/wp-nonce/wp-nonce.php');
+			require_once('plugins/comprehensive-google-maps/comprehensive-google-maps.php');
 			
 			require_once('includes/wp-ajax-plugins.php');
 			if (is_admin()) {
