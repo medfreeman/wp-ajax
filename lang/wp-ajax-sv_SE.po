@@ -1,0 +1,285 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Ajax v1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-07-07 19:51:00+0000\n"
+"Last-Translator: admin <mrboboz@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/updater.php:421
+#@ github_plugin_updater
+msgid "The plugin has been updated, but could not be reactivated. Please reactivate it manually."
+msgstr "Pluginet har uppdaterats men kunde inte återaktiveras. Vänligen återaktivera manuellt"
+
+#: includes/updater.php:422
+#@ github_plugin_updater
+msgid "Plugin reactivated successfully."
+msgstr "Pluginet återaktiverat"
+
+#: includes/wp-ajax-settings.php:23
+#@ wp-ajax
+msgid "WP Ajax"
+msgstr "WP AJax"
+
+#: includes/wp-ajax-settings.php:42
+#@ wp-ajax
+msgid "WP Ajax Settings page"
+msgstr "WP Ajax Inställningar"
+
+#: includes/wp-ajax-settings.php:101
+#@ wp-ajax
+msgid "Save Changes"
+msgstr "Spara Ändringar"
+
+#: includes/wp-ajax-settings.php:111
+#@ wp-ajax
+msgid "Cache"
+msgstr "Cache"
+
+#: includes/wp-ajax-settings.php:112
+#@ wp-ajax
+msgid "Client cache"
+msgstr "Klient cache"
+
+#: includes/wp-ajax-settings.php:113
+#@ wp-ajax
+msgid "Links"
+msgstr "Länkar"
+
+#: includes/wp-ajax-settings.php:114
+#@ wp-ajax
+msgid "jQuery"
+msgstr "jQuery"
+
+#: includes/wp-ajax-settings.php:115
+#: includes/wp-ajax-settings.php:197
+#@ wp-ajax
+msgid "Loading animation"
+msgstr "Laddningsanimering"
+
+#: includes/wp-ajax-settings.php:116
+#: includes/wp-ajax-settings.php:227
+#@ wp-ajax
+msgid "Transition animation"
+msgstr "Övergångsanimering"
+
+#: includes/wp-ajax-settings.php:117
+#@ wp-ajax
+msgid "Forms"
+msgstr "Formulär"
+
+#: includes/wp-ajax-settings.php:118
+#@ wp-ajax
+msgid "Plugins"
+msgstr "Plugins"
+
+#: includes/wp-ajax-settings.php:130
+#@ wp-ajax
+msgid "Enable caching"
+msgstr "Aktivera cachelagring"
+
+#: includes/wp-ajax-settings.php:131
+#@ wp-ajax
+msgid "Enable automatic caching of ajax-ready template files (enable in production for performance gain, disable if you're modifying template files)."
+msgstr "Aktivera automatisk cachelagring av ajax-klara mallfiler (aktivera i produktion för bättre prestanda, inaktivera om du ändrar  mallfiler)."
+
+#: includes/wp-ajax-settings.php:139
+#@ wp-ajax
+msgid "Cached files"
+msgstr "Cachelagrade filer"
+
+#: includes/wp-ajax-settings.php:140
+#@ wp-ajax
+msgid "The number of template files modified and cached for ajax requests. Even if caching is disabled files exist (so they can be php include'd), but are rewritten every request."
+msgstr "Antalet ändrade och cachade mallfiler för ajaxbegäran. Även om cachelagring inaktiveras så finns filer (så att de kan php inkluderas), men omskrivs vid varje begäran."
+
+#: includes/wp-ajax-settings.php:148
+#@ wp-ajax
+msgid "Client cache exceptions"
+msgstr "Undantag klientens cachelagring"
+
+#: includes/wp-ajax-settings.php:149
+#@ wp-ajax
+msgid "Comma-separated list of relatives urls to ignore cache on ( ie: \"products/\" )"
+msgstr "Kommaavgränsad lista av relativa sökvägar där cachlagring skall ignorers  (dvs:  \\\"produkter/\\\")"
+
+#: includes/wp-ajax-settings.php:158
+#@ wp-ajax
+msgid "Links Selector"
+msgstr "Länkväljare"
+
+#: includes/wp-ajax-settings.php:159
+#@ wp-ajax
+msgid "The jquery selector(s) of links which have to be converted."
+msgstr "Jquery selector (er) till länkar som skall konverteras."
+
+#: includes/wp-ajax-settings.php:168
+#@ wp-ajax
+msgid "Container Selector"
+msgstr "Containerselektor"
+
+#: includes/wp-ajax-settings.php:169
+#@ wp-ajax
+msgid "The jquery selector of an HTML Element used as container, opening must be contained in header.php and closing in footer.php."
+msgstr "Jquery selektorn för ett HTML-Element använt som container, öppning måste vara i header.php och stängning i footer.php."
+
+#: includes/wp-ajax-settings.php:178
+#@ wp-ajax
+msgid "Loading animation test mode"
+msgstr "Testläge för laddningsanimering"
+
+#: includes/wp-ajax-settings.php:179
+#@ wp-ajax
+msgid "When activated, requests for content will never be made, instead the loading animation will go on forever.."
+msgstr "När aktiverad, kommer begäran för innehåll aldrig att göras. I stället kommer laddningsanimeringen fortsätta i evighet..."
+
+#: includes/wp-ajax-settings.php:187
+#@ wp-ajax
+msgid "Loading container Selector"
+msgstr "Selektor för laddningscontainer"
+
+#: includes/wp-ajax-settings.php:188
+#@ wp-ajax
+msgid "The jquery selector of an HTML Element used as container for the loading animation."
+msgstr "Jquery selektorn för ett HTML-Element används som container för laddningsanimeringen."
+
+#: includes/wp-ajax-settings.php:198
+#@ wp-ajax
+msgid "Choose loading animation. For custom mode, you have to enter HTML, CSS3 and jQuery animation code."
+msgstr "Välj laddningsanimering. För egen anpassning måste du ange HTML, CSS3 och jQuery animeringskod."
+
+#: includes/wp-ajax-settings.php:207
+#@ wp-ajax
+msgid "Loading container Positionment Selector"
+msgstr "Positioneringselektor för laddningscontainer"
+
+#: includes/wp-ajax-settings.php:208
+#@ wp-ajax
+msgid "The jquery selector of an HTML Element used as reference for loading animation placement."
+msgstr "Jquery selektorn för ett HTML-Element används som referens för laddningsanimeringens placering."
+
+#: includes/wp-ajax-settings.php:217
+#@ wp-ajax
+msgid "Loading animation placement"
+msgstr "Laddningsaninmeringens placering"
+
+#: includes/wp-ajax-settings.php:218
+#@ wp-ajax
+msgid "Choose loading animation placement, relative to selected element. For custom mode, you have to enter HTML, CSS3 and jQuery animation code."
+msgstr "Välj laddningsaninmeringens placering i förhållande till valt element. För egen anpassning måste du ange HTML, CSS3 och jQuery animeringskod."
+
+#: includes/wp-ajax-settings.php:228
+#@ wp-ajax
+msgid "Choose transition animation (between contents). For custom mode, you have to enter jQuery animation code."
+msgstr "Välj övergånganimation (mellan innehåll). För egen anpassning måste du ange jQuery animeringskod."
+
+#: includes/wp-ajax-settings.php:251
+#@ wp-ajax
+msgid "Plugin List"
+msgstr "Pluginlista"
+
+#: includes/wp-ajax-settings.php:595
+#@ wp-ajax
+msgid "Expecting a Numeric value! Please fix."
+msgstr "Förväntade ett numeriskt värde! Vänligen åtgärda."
+
+#: includes/wp-ajax-settings.php:608
+#@ wp-ajax
+msgid "Expecting comma separated numeric values"
+msgstr "Förväntade kommaseparerade numeriska värden"
+
+#: includes/wp-ajax-settings.php:618
+#@ wp-ajax
+msgid "Expecting comma separated numeric values! Please fix."
+msgstr "Förväntade kommaseparerade numeriska värden! Vänligen åtgärda."
+
+#: includes/wp-ajax-settings.php:643
+#@ wp-ajax
+msgid "Invalid email! Please re-enter!"
+msgstr "Ogiltig e-postadress! Ange igen!"
+
+#: includes/wp-ajax-settings.php:645
+#@ wp-ajax
+msgid "This setting field cannot be empty! Please enter a valid email address."
+msgstr "Detta fältet får inte vara tomt! Ange en giltig e-postadress."
+
+#: includes/wp-ajax-settings.php:653
+#@ wp-ajax
+msgid "Please enter a valid email address."
+msgstr "Ange en giltig e-postadress."
+
+#: includes/wp-ajax-settings.php:897
+#@ wp-ajax
+msgid "WP Ajax Warning : Loading animation test mode activated, no wonder if nothings seems to work except the loading animation ! "
+msgstr "WP Ajax Varning: Testläge för laddningsanimering aktiverat. Inte konstigt om inget verkar fungera förutom laddningsanimeringen!"
+
+#: includes/wp-ajax-settings.php:949
+#@ wp-ajax
+msgid "Top Left"
+msgstr "Överst till vänster"
+
+#: includes/wp-ajax-settings.php:949
+#@ wp-ajax
+msgid "Top"
+msgstr "Överst"
+
+#: includes/wp-ajax-settings.php:949
+#@ wp-ajax
+msgid "Top Right"
+msgstr "Överst till höger"
+
+#: includes/wp-ajax-settings.php:950
+#@ wp-ajax
+msgid "Left"
+msgstr "Vänster"
+
+#: includes/wp-ajax-settings.php:950
+#@ wp-ajax
+msgid "Center"
+msgstr "Mitten"
+
+#: includes/wp-ajax-settings.php:950
+#@ wp-ajax
+msgid "Right"
+msgstr "Höger"
+
+#: includes/wp-ajax-settings.php:951
+#@ wp-ajax
+msgid "Bottom Left"
+msgstr "Nederst till vänster"
+
+#: includes/wp-ajax-settings.php:951
+#@ wp-ajax
+msgid "Bottom"
+msgstr "Botten"
+
+#: includes/wp-ajax-settings.php:951
+#@ wp-ajax
+msgid "Bottom Right"
+msgstr "Längst ner till höger"
+
+#: plugins/wp-nonce/wp-nonce.php:31
+#@ wp-ajax
+msgid "Security error, please <a href=\"#\" onClick=\"window.location.reload(true);\">refresh</a> the page."
+msgstr "Säkerhetsfel, vänligen <a href=\"#\" onClick=\"window.location.reload(true);\">ladda om</a>sidan."
+
+#: wp-ajax.php:215
+#: wp-ajax.php:223
+#@ wp-ajax
+msgid "Error creating ajax template"
+msgstr "Fel när ajax-mallen skapades"
+
